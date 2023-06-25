@@ -2,3 +2,4 @@
 tsconfig.json
 craco.config.ts
 tsconfig.path.json
+.eslintrc
