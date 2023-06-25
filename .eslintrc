@@ -7,7 +7,7 @@
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "import", "prettier"],
+  "plugins": ["react", "@typescript-eslint", "import", "prettier"],
   "parserOptions": {
       "ecmaFeatures": {
           "jsx": true
@@ -58,7 +58,7 @@
     "no-var": "error",
     "no-use-before-define": 1,
     "arrow-body-style": 1,
-    // typescript
+    // typescript rules
     "@typescript-eslint/consistent-type-imports": 1,
     "@typescript-eslint/no-unused-vars": "error",
     // react rules
