@@ -9,7 +9,8 @@
         "@interfaces/*": ["interfaces/*"],
         "@pages/*": ["pages/*"],
         "@routes/*": ["routes/*"],
-        "@utils/*": ["utils/*"]
+        "@utils/*": ["utils/*"],
+        "@styles/*": ["styles/*"]
       },
     },
 }
