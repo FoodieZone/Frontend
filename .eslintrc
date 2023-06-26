@@ -41,6 +41,11 @@
               "position": "after"
           },
           {
+            "pattern": "~/*",
+            "group": "external",
+            "position": "after"
+          },
+          {
             "pattern": "react",
             "group": "builtin",
             "position": "before"
