@@ -1,14 +1,13 @@
-import { Fragment } from 'react';
-
 import { Global } from '@emotion/react';
 
+import Layout from './components/Layout';
 import { reset } from './styles';
 
 function App() {
 	return (
-		<Fragment>
+		<Layout>
 			<Global styles={reset} />
-		</Fragment>
+		</Layout>
 	);
 }
 
