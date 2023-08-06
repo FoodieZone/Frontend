@@ -1,5 +1,7 @@
 import type { PropsWithChildren } from 'react';
 
-const Layout = ({ children }: PropsWithChildren) => <>{children}</>;
+import { S } from './index.styles';
+
+const Layout = ({ children }: PropsWithChildren) => <S.Container>{children}</S.Container>;
 
 export default Layout;
