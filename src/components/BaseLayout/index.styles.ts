@@ -7,6 +7,5 @@ export const S = {
 		min-width: 375px;
 		max-width: 768px;
 		margin: 0 auto;
-		background-color: blue;
 	`,
 };

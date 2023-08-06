@@ -5,16 +5,16 @@ import router from '@routes/index';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
-import Layout from './components/Layout';
+import BaseLayout from './components/BaseLayout';
 import reportWebVitals from './reportWebVitals';
 import { reset } from './styles';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
-		<Layout>
+		<BaseLayout>
 			<Global styles={reset} />
 			<RouterProvider router={router} />
-		</Layout>
+		</BaseLayout>
 	</React.StrictMode>
 );
 
