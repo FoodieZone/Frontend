@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '~/App';
+import { HomePage } from '~/pages';
 
 interface RouterBase {
 	id: string;
@@ -12,9 +13,14 @@ interface RouterBase {
 
 const routeData: RouterBase[] = [
 	{
-		id: 'Home',
+		id: 'Main',
 		path: '/',
 		element: <App />,
+	},
+	{
+		id: 'Home',
+		path: '/home',
+		element: <HomePage />,
 	},
 ];
 
