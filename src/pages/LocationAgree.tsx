@@ -1,14 +1,26 @@
+import { useState } from 'react';
+
 import styled from '@emotion/styled';
 
+import { useGeoLocation } from '~/hooks';
+
+import { CancelPopup } from '~/components/LocatingAgree';
 import { Icon } from '~/components/shared';
 
 function LocationAgree() {
+	const { geoLocating } = useGeoLocation({ pending: true });
+	const [isOpen, setIsOpen] = useState(false);
+
 	const handleClickAgree = () => {
-		console.log('agree');
+		geoLocating();
 	};
 
 	const handleClickCancel = () => {
-		console.log('cancel');
+		setIsOpen(true);
+	};
+
+	const handleClosePopup = () => {
+		setIsOpen(false);
 	};
 
 	return (
@@ -27,6 +39,8 @@ function LocationAgree() {
 					<Cancel onClick={handleClickCancel}>나중에 하기</Cancel>
 				</Buttons>
 			</Wrapper>
+
+			{isOpen && <CancelPopup onClose={handleClosePopup} />}
 		</Container>
 	);
 }
@@ -34,18 +48,23 @@ function LocationAgree() {
 export default LocationAgree;
 
 const Container = styled.div`
-	width: 100%;
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 `;
 
 const Wrapper = styled.div`
-	padding: 25px;
+	position: absolute;
+	top: 25%;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0 28px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-items: center;
 `;
 
 const Strong = styled.span`
@@ -57,7 +76,7 @@ const Strong = styled.span`
 	letter-spacing: 0.87px;
 
 	// margin 정보도 피그마에 노출시켜달라고 요청해야한다.
-	margin-top: 30px;
+	margin-top: 32px;
 	color: #000000;
 `;
 
@@ -71,13 +90,13 @@ const Notice = styled.span`
 	letter-spacing: -0.24px;
 
 	// margin 정보도 피그마에 노출시켜달라고 요청해야한다.
-	margin-top: 30px;
+	margin-top: 16px;
 	color: #8e8e93;
 `;
 
 const Buttons = styled.div`
 	// margin 정보도 피그마에 노출시켜달라고 요청해야한다.
-	margin-top: 30px;
+	margin-top: 32px;
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
