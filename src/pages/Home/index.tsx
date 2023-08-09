@@ -6,13 +6,16 @@ const HomePage = () => (
 	<Container>
 		<Title>{TITLE}</Title>
 
+		<SelectRoundButtonWrapper />
+
 		<StartButton>{BUTTON_TEXT}</StartButton>
 	</Container>
 );
 
 const Container = styled.div`
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 `;
 
 const Title = styled.span`
@@ -22,6 +25,14 @@ const Title = styled.span`
 	font-size: 36px;
 	font-weight: 800;
 	line-height: 44px;
+`;
+
+const SelectRoundButtonWrapper = styled.div`
+	width: 306px;
+	height: 52px;
+	margin-top: 58px;
+	border: 1px solid #e5e7eb;
+	border-radius: 6px;
 `;
 
 const StartButton = styled.button`
