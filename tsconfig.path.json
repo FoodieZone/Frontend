@@ -11,7 +11,8 @@
         "@pages/*": ["pages/*"],
         "@routes/*": ["routes/*"],
         "@utils/*": ["utils/*"],
-        "@styles/*": ["styles/*"]
+        "@styles/*": ["styles/*"],
+        "@assets/*": ["assets/*"]
       },
     },
 }
