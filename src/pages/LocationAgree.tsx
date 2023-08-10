@@ -71,11 +71,9 @@ const Strong = styled.span`
 	font-weight: 700;
 	font-size: 21px;
 
-	// line-height, letter-spacing은 %로 받아서 수정해야한다.
-	line-height: 28px;
+	line-height: 133.333%;
 	letter-spacing: 0.87px;
 
-	// margin 정보도 피그마에 노출시켜달라고 요청해야한다.
 	margin-top: 32px;
 	color: #000000;
 `;
@@ -85,17 +83,14 @@ const Notice = styled.span`
 	font-weight: 400;
 	font-size: 14px;
 
-	// line-height, letter-spacing은 %로 받아서 수정해야한다.
-	line-height: 20px;
+	line-height: 142.857%;
 	letter-spacing: -0.24px;
 
-	// margin 정보도 피그마에 노출시켜달라고 요청해야한다.
 	margin-top: 16px;
 	color: #8e8e93;
 `;
 
 const Buttons = styled.div`
-	// margin 정보도 피그마에 노출시켜달라고 요청해야한다.
 	margin-top: 32px;
 	display: flex;
 	flex-direction: column;
@@ -107,12 +102,10 @@ const Button = styled.button`
 	border-radius: 16px;
 	border: none;
 	padding: 14px 16px;
-	font-weight: 600;
 	font-size: 15px;
 
-	// line-height, letter-spacing은 %로 받아서 수정해야한다.
-	line-height: 21px;
-	letter-spacing: -0.41px;
+	line-height: 140%;
+	letter-spacing: -0.408px;
 	text-align: center;
 	cursor: pointer;
 `;
@@ -120,7 +113,8 @@ const Button = styled.button`
 const Agree = styled(Button)`
 	// 색상 팔레트를 만들어서 관리하도록 수정해야한다.
 	color: #ffffff;
-	background-color: #5887f6;
+	background-color: #ff5e60;
+	font-weight: 600;
 `;
 
 const Cancel = styled(Button)`
