@@ -1,3 +1,1 @@
-import LocationAgree from './LocationAgree';
-
-export { LocationAgree };
+export { default as LocationAgree } from './LocationAgree';
