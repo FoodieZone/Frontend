@@ -16,10 +16,13 @@ function Home() {
 	);
 }
 
+export default Home;
+
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
+
 const Title = styled.span`
 	margin: 155px 0 0 40px;
 	white-space: pre-line;
@@ -28,6 +31,7 @@ const Title = styled.span`
 	font-weight: 800;
 	line-height: 44px;
 `;
+
 const SelectRoundButtonWrapper = styled.div`
 	height: 52px;
 	margin: 58px 28px 0;
@@ -36,6 +40,7 @@ const SelectRoundButtonWrapper = styled.div`
 	display: flex;
 	justify-content: space-evenly;
 `;
+
 const SelectRoundButton = styled.label`
 	cursor: pointer;
 	display: flex;
@@ -43,11 +48,13 @@ const SelectRoundButton = styled.label`
 	align-items: center;
 	flex: 1;
 `;
+
 const Divider = styled.div`
 	width: 1px;
 	height: 100%;
 	background-color: #e6e7eb;
 `;
+
 const StartButton = styled.button`
 	height: 50px;
 	border-radius: 12px;
@@ -63,5 +70,3 @@ const StartButton = styled.button`
 	border: none;
 	cursor: pointer;
 `;
-
-export default Home;
