@@ -1,14 +1,20 @@
 import React from 'react';
 
+import { Global } from '@emotion/react';
 import router from '@routes/index';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
+import BaseLayout from './components/BaseLayout';
 import reportWebVitals from './reportWebVitals';
+import { reset } from './styles';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<BaseLayout>
+			<Global styles={reset} />
+			<RouterProvider router={router} />
+		</BaseLayout>
 	</React.StrictMode>
 );
 
