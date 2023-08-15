@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 function Home() {
@@ -8,8 +7,8 @@ function Home() {
 
 			<SelectRoundButtonWrapper>
 				<SelectRoundButton>16강</SelectRoundButton>
-				<SelectRoundButton isCenter>8강</SelectRoundButton>
-				<SelectRoundButton>4강</SelectRoundButton>
+				<Divider />
+				<SelectRoundButton>8강</SelectRoundButton>
 			</SelectRoundButtonWrapper>
 
 			<StartButton>시작하기</StartButton>
@@ -20,10 +19,9 @@ function Home() {
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 `;
 const Title = styled.span`
-	margin-top: 155px;
+	margin: 155px 0 0 40px;
 	white-space: pre-line;
 	color: #222;
 	font-size: 36px;
@@ -31,38 +29,36 @@ const Title = styled.span`
 	line-height: 44px;
 `;
 const SelectRoundButtonWrapper = styled.div`
-	width: 306px;
 	height: 52px;
-	margin-top: 58px;
+	margin: 58px 28px 0;
 	border: 1px solid #e5e7eb;
 	border-radius: 6px;
 	display: flex;
 	justify-content: space-evenly;
 `;
-const SelectRoundButton = styled.label<{ isCenter?: boolean }>`
+const SelectRoundButton = styled.label`
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex: 1;
-	${({ isCenter }) =>
-		isCenter &&
-		css`
-			border-left: 1px solid #e5e7eb;
-			border-right: 1px solid #e5e7eb;
-		`};
+`;
+const Divider = styled.div`
+	width: 1px;
+	height: 100%;
+	background-color: #e6e7eb;
 `;
 const StartButton = styled.button`
-	width: 295px;
 	height: 50px;
 	border-radius: 12px;
-	box-shadow: 0px 10px 20px 0px rgba(6, 0, 101, 0.2);
 	position: fixed;
-	bottom: 47px;
+	right: 28px;
+	left: 28px;
+	bottom: 32px;
 	outline: none;
-	background-color: #5887f6;
+	background-color: #ff5e60;
 	color: #fff;
-	font-size: 18px;
+	font-size: 15px;
 	font-weight: 600;
 	border: none;
 	cursor: pointer;
