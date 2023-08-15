@@ -36,7 +36,7 @@ const routeData: RouterBase[] = [
 	},
 	{
 		id: 'WorldCupResult',
-		path: '/world_cup_result',
+		path: '/world_cup/result',
 		element: <WorldCupResult />,
 	},
 ];
