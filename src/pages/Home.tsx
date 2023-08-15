@@ -3,13 +3,15 @@ import styled from '@emotion/styled';
 function Home() {
 	return (
 		<Container>
-			<Title>{`Welcome\nFoodie Zone`}</Title>
+			<Contents>
+				<Title>{`Welcome\nFoodie Zone`}&nbsp;&nbsp;🍣</Title>
 
-			<SelectRoundButtonWrapper>
-				<SelectRoundButton>16강</SelectRoundButton>
-				<Divider />
-				<SelectRoundButton>8강</SelectRoundButton>
-			</SelectRoundButtonWrapper>
+				<SelectRoundButtonWrapper>
+					<SelectRoundButton>16강</SelectRoundButton>
+					<Divider />
+					<SelectRoundButton>8강</SelectRoundButton>
+				</SelectRoundButtonWrapper>
+			</Contents>
 
 			<StartButton>시작하기</StartButton>
 		</Container>
@@ -19,6 +21,13 @@ function Home() {
 export default Home;
 
 const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+`;
+
+const Contents = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
@@ -57,11 +66,8 @@ const Divider = styled.div`
 
 const StartButton = styled.button`
 	height: 50px;
+	margin: 0 28px 32px;
 	border-radius: 12px;
-	position: fixed;
-	right: 28px;
-	left: 28px;
-	bottom: 32px;
 	outline: none;
 	background-color: #ff5e60;
 	color: #fff;
