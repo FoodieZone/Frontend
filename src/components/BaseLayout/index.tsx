@@ -2,7 +2,9 @@ import type { PropsWithChildren } from 'react';
 
 import styled from '@emotion/styled';
 
-const BaseLayout = ({ children }: PropsWithChildren) => <Container>{children}</Container>;
+function BaseLayout({ children }: PropsWithChildren) {
+	return <Container>{children}</Container>;
+}
 
 const Container = styled.main`
 	width: 100%;
