@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { isUndefined } from 'lodash';
+import { isUndefined } from 'lodash-es';
 declare global {
 	interface Window {
 		AndroidWebViewBridge?: unknown;
