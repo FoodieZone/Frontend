@@ -3,14 +3,12 @@ import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Dumplings from 'assets/images/13 Dumplings.jpg';
 
-import type { ResultType } from '~/interfaces/result';
+import type { ResultType } from './index.types';
 
 function WorldCupResult() {
-	// FIXME: 임시 로딩 처리
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [result, setResult] = useState<ResultType | null>(null);
 
-	// FIXME: 서버에서 넘어온 값이 들어갈 예정
 	useEffect(() => {
 		setTimeout(() => {
 			setResult(() => ({ id: 1, title: '만두', src: Dumplings }));
@@ -21,7 +19,6 @@ function WorldCupResult() {
 	return (
 		<Container>
 			<Title>Final food</Title>
-
 			{isLoading ? (
 				<Spinner />
 			) : (
