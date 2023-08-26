@@ -1,13 +1,25 @@
+import { useEffect, useState } from 'react';
+
 import styled from '@emotion/styled';
 import Dumplings from 'assets/images/13 Dumplings.jpg';
 
+import type { ResultType } from '~/interfaces/result';
+
 function WorldCupResult() {
+	const [result, setResult] = useState<ResultType | null>(null);
+
+	// FIXME: 서버에서 넘어온 값이 들어갈 예정
+	useEffect(() => {
+		setResult(() => ({ id: 1, title: '만두', src: Dumplings }));
+	}, []);
+
 	return (
 		<Container>
 			<Title>Final food</Title>
-			<Description>당신은 만두 러버입니다!</Description>
-			<FoodImage src={Dumplings} alt="food-image" />
-			<FoodName>만두</FoodName>
+			{/* TODO: 로딩이 들어갈 예정 */}
+			<Description>당신은 {result?.title ?? ''} 러버입니다!</Description>
+			<FoodImage src={result?.src ?? ''} alt="food-image" />
+			<FoodName>{result?.title ?? ''}</FoodName>
 		</Container>
 	);
 }
