@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '~/App';
-import { LocationAgree } from '~/pages';
+import { Home, LocationAgree } from '~/pages';
 
 interface RouterBase {
 	id: string;
@@ -13,7 +13,7 @@ interface RouterBase {
 
 const routeData: RouterBase[] = [
 	{
-		id: 'Home',
+		id: 'Main',
 		path: '/',
 		element: <App />,
 	},
@@ -21,6 +21,11 @@ const routeData: RouterBase[] = [
 		id: 'LocationInformationAgree',
 		path: '/location_agree',
 		element: <LocationAgree />,
+	},
+	{
+		id: 'Home',
+		path: '/home',
+		element: <Home />,
 	},
 ];
 
