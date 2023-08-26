@@ -1,4 +1,8 @@
+import { Fragment } from 'react';
+
 import styled from '@emotion/styled';
+
+import { ROUND } from './index.consts';
 
 function Home() {
 	return (
@@ -7,9 +11,16 @@ function Home() {
 				<Title>{`Welcome\nFoodie Zone`}&nbsp;&nbsp;🍣</Title>
 
 				<SelectRoundButtonWrapper>
-					<SelectRoundButton>16강</SelectRoundButton>
-					<Divider />
-					<SelectRoundButton>8강</SelectRoundButton>
+					{ROUND.map((round, index) =>
+						ROUND.length - 1 === index ? (
+							<SelectRoundButton key={`round-${round.id}`}>{round.title}</SelectRoundButton>
+						) : (
+							<Fragment key={`round-${round.id}`}>
+								<SelectRoundButton>{round.title}</SelectRoundButton>
+								<Divider />
+							</Fragment>
+						)
+					)}
 				</SelectRoundButtonWrapper>
 			</Contents>
 
