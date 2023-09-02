@@ -7,6 +7,7 @@ function Start() {
 		<Container>
 			<Wrapper>
 				<Icon name="logo-small" width={135} />
+
 				<Contents>
 					<Icon name="icon-food_truck" />
 					<Strong>당신이 땡기는 음식은?</Strong>
@@ -27,24 +28,26 @@ function Start() {
 
 export default Start;
 
-const Container = styled.div``;
+const Container = styled.div`
+	height: 100%;
+	padding: 15px 27px 23px;
+	box-sizing: border-box;
+`;
 
 const Wrapper = styled.div`
-	padding: 15px 27px 23px;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 `;
 
 const Contents = styled.div`
-	position: absolute;
-	left: 50%;
-	top: 45%;
-	transform: translate(-50%, -50%);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
+	color: #000000;
+	margin-bottom: 35%;
 `;
 
 const Strong = styled.div`
@@ -55,18 +58,19 @@ const Strong = styled.div`
 	margin: 41px 0 28px;
 `;
 
-const Subscription = styled.div``;
+const Subscription = styled.div`
+	font-size: 19px;
+	font-weight: 300;
+	line-height: 121.053%;
+	letter-spacing: -1.52px;
+`;
 
 const StartButton = styled.button`
-	position: absolute;
-	bottom: 23px;
-	left: 50%;
-	transform: translateX(-50%);
-	width: calc(100% - 54px);
 	border-radius: 16px;
 	border: none;
 	cursor: pointer;
 	padding: 14px 16px;
+	height: 58px;
 	background-color: #ff5e60;
 	color: #ffffff;
 	font-size: 15px;
