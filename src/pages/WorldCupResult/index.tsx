@@ -16,6 +16,9 @@ function WorldCupResult() {
 		}, 1000);
 	}, []);
 
+	const title = result?.title ?? '';
+	const src = result?.src ?? '';
+
 	return (
 		<Container>
 			<Title>Final food</Title>
@@ -23,9 +26,9 @@ function WorldCupResult() {
 				<Spinner />
 			) : (
 				<>
-					<Description>당신은 {result?.title ?? ''} 러버입니다!</Description>
-					<FoodImage src={result?.src ?? ''} alt="food-image" />
-					<FoodName>{result?.title ?? ''}</FoodName>
+					<Description>당신은 {title} 러버입니다!</Description>
+					<FoodImage src={src} alt="food-image" />
+					<FoodName>{title}</FoodName>
 				</>
 			)}
 		</Container>
