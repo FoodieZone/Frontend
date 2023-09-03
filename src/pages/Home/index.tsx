@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Children, Fragment } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -11,14 +11,16 @@ function Home() {
 				<Title>{`Welcome\nFoodie Zone`}&nbsp;&nbsp;🍣</Title>
 
 				<SelectRoundButtonWrapper>
-					{ROUND.map((round, index) =>
-						ROUND.length - 1 === index ? (
-							<SelectRoundButton key={`round-${round.id}`}>{round.title}</SelectRoundButton>
-						) : (
-							<Fragment key={`round-${round.id}`}>
+					{Children.toArray(
+						ROUND.map((round, index) =>
+							ROUND.length - 1 === index ? (
 								<SelectRoundButton>{round.title}</SelectRoundButton>
-								<Divider />
-							</Fragment>
+							) : (
+								<Fragment>
+									<SelectRoundButton>{round.title}</SelectRoundButton>
+									<Divider />
+								</Fragment>
+							)
 						)
 					)}
 				</SelectRoundButtonWrapper>
