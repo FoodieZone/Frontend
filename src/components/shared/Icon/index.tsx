@@ -8,7 +8,19 @@ interface Props extends ImgHTMLAttributes<HTMLImageElement> {
 }
 
 function Icon({ className, name, alt, ...restProps }: Props) {
-	const imagePath = `assets/${name}.svg`;
+	const svgImagePath = `/assets/${name}.svg`;
+	const pngImagePath = `/assets/${name}.png`;
+
+	const svgImageExists = require
+		.context('/public/assets', false, /\.svg$/)
+		.keys()
+		.includes(`./${name}.svg`);
+	const pngImageExists = require
+		.context('/public/assets', false, /\.png$/)
+		.keys()
+		.includes(`./${name}.png`);
+
+	const imagePath = svgImageExists ? svgImagePath : pngImageExists ? pngImagePath : '';
 
 	return <Image className={className} src={imagePath} alt={alt ?? name} {...restProps} />;
 }
