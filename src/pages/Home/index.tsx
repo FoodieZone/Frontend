@@ -12,16 +12,12 @@ function Home() {
 
 				<SelectRoundButtonWrapper>
 					{Children.toArray(
-						ROUND.map((round, index) =>
-							ROUND.length - 1 === index ? (
+						ROUND.map((round, index) => (
+							<Fragment>
 								<SelectRoundButton>{round.title}</SelectRoundButton>
-							) : (
-								<Fragment>
-									<SelectRoundButton>{round.title}</SelectRoundButton>
-									<Divider />
-								</Fragment>
-							)
-						)
+								{ROUND.length - 1 !== index && <Divider />}
+							</Fragment>
+						))
 					)}
 				</SelectRoundButtonWrapper>
 			</Contents>
