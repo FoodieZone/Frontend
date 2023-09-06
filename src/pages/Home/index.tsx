@@ -1,4 +1,4 @@
-import { Children, Fragment } from 'react';
+import { Children } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -13,10 +13,10 @@ function Home() {
 				<SelectRoundButtonWrapper>
 					{Children.toArray(
 						ROUND.map((round, index) => (
-							<Fragment>
+							<>
 								<SelectRoundButton>{round.title}</SelectRoundButton>
 								{ROUND.length - 1 !== index && <Divider />}
-							</Fragment>
+							</>
 						))
 					)}
 				</SelectRoundButtonWrapper>

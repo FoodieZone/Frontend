@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
 import Dumplings from 'assets/images/13 Dumplings.jpg';
