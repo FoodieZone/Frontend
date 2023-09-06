@@ -1,9 +1,10 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
-import Dumplings from 'assets/images/13 Dumplings.jpg';
 
 import type { ResultType } from './index.types';
+
+import { Icon } from '~/components/shared';
 
 function WorldCupResult() {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -14,7 +15,7 @@ function WorldCupResult() {
 
 	useEffect(() => {
 		setTimeout(() => {
-			setResult(() => ({ id: 1, title: '만두', src: Dumplings }));
+			setResult(() => ({ id: 1, title: '만두', src: 'icon-dumplings' }));
 			setIsLoading(false);
 		}, 1000);
 	}, []);
@@ -27,7 +28,7 @@ function WorldCupResult() {
 			) : (
 				<>
 					<Description>당신은 {title} 러버입니다!</Description>
-					<FoodImage src={src} alt="food-image" />
+					<FoodIcon name={src} width={200} />
 					<FoodName>{title}</FoodName>
 				</>
 			)}
@@ -59,8 +60,7 @@ const Description = styled.span`
 	line-height: 19px;
 `;
 
-const FoodImage = styled.img`
-	width: 200px;
+const FoodIcon = styled(Icon)`
 	margin-top: 38px;
 `;
 
