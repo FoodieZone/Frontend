@@ -9,15 +9,15 @@ function WorldCupResult() {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [result, setResult] = useState<ResultType | null>(null);
 
+	const title = result?.title ?? '';
+	const src = result?.src ?? '';
+
 	useEffect(() => {
 		setTimeout(() => {
 			setResult(() => ({ id: 1, title: '만두', src: Dumplings }));
 			setIsLoading(false);
 		}, 1000);
 	}, []);
-
-	const title = result?.title ?? '';
-	const src = result?.src ?? '';
 
 	return (
 		<Container>
