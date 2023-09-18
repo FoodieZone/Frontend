@@ -1,72 +1,87 @@
-import { css } from '@emotion/react';
+import { Children } from 'react';
+
 import styled from '@emotion/styled';
 
-import { BUTTON_TEXT, ROUND_16, ROUND_4, ROUND_8, TITLE } from './index.consts';
+import { ROUND } from './index.consts';
 
-const HomePage = () => (
-	<Container>
-		{/* TODO: 디자인 수정 후 다시 */}
-		<Title>{TITLE}</Title>
+function Home() {
+	return (
+		<Container>
+			<Contents>
+				<Title>{`Welcome\nFoodie Zone`}&nbsp;&nbsp;🍣</Title>
 
-		<SelectRoundButtonWrapper>
-			<SelectRoundButton>{ROUND_16}</SelectRoundButton>
-			<SelectRoundButton isCenter>{ROUND_8}</SelectRoundButton>
-			<SelectRoundButton>{ROUND_4}</SelectRoundButton>
-		</SelectRoundButtonWrapper>
+				<SelectRoundButtonWrapper>
+					{Children.toArray(
+						ROUND.map((round, index) => (
+							<>
+								<SelectRoundButton>{round.title}</SelectRoundButton>
+								{ROUND.length - 1 !== index && <Divider />}
+							</>
+						))
+					)}
+				</SelectRoundButtonWrapper>
+			</Contents>
 
-		<StartButton>{BUTTON_TEXT}</StartButton>
-	</Container>
-);
+			<StartButton>시작하기</StartButton>
+		</Container>
+	);
+}
+
+export default Home;
 
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	justify-content: space-between;
+	height: 100%;
 `;
+
+const Contents = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
 const Title = styled.span`
-	margin-top: 155px;
+	margin: 155px 0 0 40px;
 	white-space: pre-line;
 	color: #222;
 	font-size: 36px;
 	font-weight: 800;
 	line-height: 44px;
 `;
+
 const SelectRoundButtonWrapper = styled.div`
-	width: 306px;
 	height: 52px;
-	margin-top: 58px;
+	margin: 58px 28px 0;
 	border: 1px solid #e5e7eb;
 	border-radius: 6px;
 	display: flex;
 	justify-content: space-evenly;
 `;
-const SelectRoundButton = styled.label<{ isCenter?: boolean }>`
+
+const SelectRoundButton = styled.label`
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex: 1;
-	${({ isCenter }) =>
-		isCenter &&
-		css`
-			border-left: 1px solid #e5e7eb;
-			border-right: 1px solid #e5e7eb;
-		`};
 `;
+
+const Divider = styled.div`
+	width: 1px;
+	height: 100%;
+	background-color: #e6e7eb;
+`;
+
 const StartButton = styled.button`
-	width: 295px;
 	height: 50px;
+	margin: 0 28px 32px;
 	border-radius: 12px;
-	box-shadow: 0px 10px 20px 0px rgba(6, 0, 101, 0.2);
-	position: fixed;
-	bottom: 47px;
 	outline: none;
-	background-color: #5887f6;
+	background-color: #ff5e60;
 	color: #fff;
-	font-size: 18px;
+	font-size: 15px;
 	font-weight: 600;
 	border: none;
 	cursor: pointer;
 `;
-
-export default HomePage;

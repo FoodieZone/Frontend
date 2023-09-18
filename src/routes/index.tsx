@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '~/App';
-import { Home, WorldCupPage, LocationAgree } from '~/pages';
+import { Home, LocationAgree, WorldCupPage, Start, WorldCupResult } from '~/pages';
 
 interface RouterBase {
 	id: string;
@@ -31,6 +31,16 @@ const routeData: RouterBase[] = [
 		id: 'Home',
 		path: '/home',
 		element: <Home />,
+	},
+	{
+		id: 'Start',
+		path: '/start',
+		element: <Start />,
+	},
+	{
+		id: 'WorldCupResult',
+		path: '/world_cup/result',
+		element: <WorldCupResult />,
 	},
 ];
 

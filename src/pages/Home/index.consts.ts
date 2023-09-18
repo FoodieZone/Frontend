@@ -1,5 +1,6 @@
-export const TITLE = `Welcome\nFoodie Zone`;
-export const BUTTON_TEXT = '시작하기';
-export const ROUND_16 = '16강';
-export const ROUND_8 = '8강';
-export const ROUND_4 = '4강';
+import type { RoundType } from './index.types';
+
+export const ROUND: RoundType[] = [
+	{ title: '8강', value: 8 },
+	{ title: '16강', value: 16 },
+];
