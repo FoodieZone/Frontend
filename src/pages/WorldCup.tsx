@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
 import Burger from '@assets/png/Burger.png';
-import CoffeCup from '@assets/png/CoffeCup.png';
+import CoffeeCup from '@assets/png/CoffeeCup.png';
 import Pizza from '@assets/png/Pizza.png';
 import Sandwich from '@assets/png/Sandwich.png';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 type candidatesFromServerType = { name: string; image: string };
 
@@ -19,7 +20,7 @@ const candidatesFromServer = [
 	},
 	{
 		name: '카페',
-		image: CoffeCup,
+		image: CoffeeCup,
 	},
 	{
 		name: '샌드위치',
@@ -28,12 +29,13 @@ const candidatesFromServer = [
 ];
 
 const WorldCupPage = () => {
-	const [selected, setSelected] = useState<number | undefined>(undefined);
+	const navigate = useNavigate();
+
 	const [candidates, setCandidates] = useState<candidatesFromServerType[]>();
 	const [currentRound, setCurrentRound] = useState<number>(1);
-	const [leftIndex, setLeftIndex] = useState<number>(0);
 	const [round, setRound] = useState<number>(0);
 
+	const leftIndex = useRef<number>(0);
 	const winners = useRef<candidatesFromServerType[]>([]);
 
 	useEffect(() => {
@@ -42,15 +44,24 @@ const WorldCupPage = () => {
 		setRound(candidatesFromServer.length / 2);
 	}, []);
 
-	const handleClickCandidate = (el: candidatesFromServerType, index: number) => {
-		setCurrentRound((prev) => ++prev);
-		setLeftIndex((prev) => prev + 2);
-
+	const handleClickCandidate = (el: candidatesFromServerType) => {
 		winners.current.push(el);
+
+		setCurrentRound((prev) => ++prev);
+		leftIndex.current = leftIndex.current += 2;
 
 		if (winners.current.length === round) {
 			setCandidates(winners.current);
-			setLeftIndex(0);
+			leftIndex.current = 0;
+
+			if (winners.current.length === 1 && round === 1) {
+				// 결과 페이지로 이동
+				// navigate('/world-cup-result');
+				navigate('/home');
+				return;
+			}
+
+			winners.current = [];
 			setCurrentRound(0);
 			setRound((prev) => prev / 2);
 		}
@@ -58,18 +69,18 @@ const WorldCupPage = () => {
 
 	return (
 		<Container>
-			<Title>
-				Choice Food {currentRound}/{round}
-			</Title>
+			<Title>Choice Food</Title>
+			<SubTitle>
+				{currentRound} / {round}
+			</SubTitle>
 			<CandidatesWrapper>
-				{candidates?.slice(leftIndex, leftIndex + 2).map((el, index) => (
-					<CandidateLeft
-						key={`candidate-${el.name}`}
-						onClick={() => handleClickCandidate(el, index)}
-						selected={selected}
-					>
-						<img src={el.image} alt={el.name} width="100%" style={{ objectFit: 'cover' }} />
-					</CandidateLeft>
+				{candidates?.slice(leftIndex.current, leftIndex.current + 2).map((el, index) => (
+					<Candidate key={`candidate-${el.name}`}>
+						<CandidateImage onClick={() => handleClickCandidate(el)} index={index}>
+							<img src={el.image} alt={el.name} width={138} />
+						</CandidateImage>
+						<CandidateName>{el.name}</CandidateName>
+					</Candidate>
 				))}
 			</CandidatesWrapper>
 		</Container>
@@ -83,17 +94,23 @@ const Container = styled.div`
 	align-items: center;
 `;
 
-const Title = styled.span`
+const Title = styled.div`
 	margin-top: 155px;
-	white-space: pre-line;
+
 	color: #222;
-	font-size: 36px;
+	font-size: 35px;
 	font-weight: 800;
 	line-height: 44px;
 `;
 
+const SubTitle = styled.span`
+	font-size: 25px;
+	font-weight: 800;
+`;
+
 const CandidatesWrapper = styled.div`
 	width: 100%;
+
 	display: flex;
 	justify-content: space-evenly;
 	gap: 10px;
@@ -102,15 +119,20 @@ const CandidatesWrapper = styled.div`
 `;
 
 const Candidate = styled.div`
+	font-size: 22px;
+	color: #a4a4a4;
+`;
+
+const CandidateImage = styled.div<{ index: number }>`
+	background-color: ${({ index }) => (index === 0 ? '#ff5e60' : '#EDEDF780')};
+
+	border-radius: 50%;
+`;
+
+const CandidateName = styled.div`
 	text-align: center;
+	font-family: Lato;
+	font-weight: 700;
 
-	transition: 600ms;
-`;
-
-const CandidateLeft = styled(Candidate)<{ selected: number | undefined }>`
-	width: ${({ selected }) => (selected === 1 ? '0%' : '100%')};
-`;
-
-const CandidateRight = styled(Candidate)<{ selected: number | undefined }>`
-	width: ${({ selected }) => (selected === 0 ? '0%' : '100%')};
+	padding: 20px 0;
 `;
