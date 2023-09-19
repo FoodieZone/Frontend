@@ -1,16 +1,23 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
-import { URL } from './constants';
+import { useNavigate } from 'react-router-dom';
+
+import { URL } from '~/constants';
+import { useIsWebView } from '~/hooks';
 
 function App() {
-	return (
-		<div style={{ display: 'flex', flexDirection: 'column' }}>
-			<Link to={URL.HOME}>HOME</Link>
-			<Link to={URL.MAIN}>MAIN</Link>
-			<Link to={URL.LOCATION_INFORMATION_AGREE}>LOCATION_INFORMATION_AGREE</Link>
-			<Link to={URL.WORLD_CUP.RESULT}>WORLD_CUP.RESULT</Link>
-		</div>
-	);
+	const isWebView = useIsWebView();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (isWebView) {
+			navigate(URL.START, { replace: true });
+		} else {
+			navigate(URL.SPLASH, { replace: true });
+		}
+	}, [isWebView, navigate]);
+
+	return null;
 }
 
 export default App;

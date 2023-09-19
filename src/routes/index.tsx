@@ -4,7 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import App from '~/App';
 import { URL } from '~/constants';
-import { Home, LocationAgree, Start, WorldCupResult } from '~/pages';
+import { Home, LocationAgree, Start, WorldCupResult, Splash } from '~/pages';
 
 interface RouterBase {
 	id: string;
@@ -30,13 +30,18 @@ const routeData: RouterBase[] = [
 	},
 	{
 		id: 'Start',
-		path: '/start',
+		path: URL.START,
 		element: <Start />,
 	},
 	{
 		id: 'WorldCupResult',
 		path: URL.WORLD_CUP.RESULT,
 		element: <WorldCupResult />,
+	},
+	{
+		id: 'Splash',
+		path: URL.SPLASH,
+		element: <Splash />,
 	},
 ];
 
