@@ -1,32 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
-import Burger from '@assets/png/Burger.png';
-import CoffeeCup from '@assets/png/CoffeeCup.png';
-import Pizza from '@assets/png/Pizza.png';
-import Sandwich from '@assets/png/Sandwich.png';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-type candidatesFromServerType = { name: string; image: string };
+import { candidatesFromServer } from './index.consts';
 
-const candidatesFromServer = [
-	{
-		name: '햄버거',
-		image: Burger,
-	},
-	{
-		name: '피자',
-		image: Pizza,
-	},
-	{
-		name: '카페',
-		image: CoffeeCup,
-	},
-	{
-		name: '샌드위치',
-		image: Sandwich,
-	},
-];
+import type { CandidatesFromServerType } from './index.types';
 
 const WorldCupPage = () => {
 	const navigate = useNavigate();
@@ -34,12 +13,12 @@ const WorldCupPage = () => {
 		state: { round },
 	} = useLocation();
 
-	const [candidates, setCandidates] = useState<candidatesFromServerType[]>();
+	const [candidates, setCandidates] = useState<CandidatesFromServerType[]>();
 	const [currentMatch, setCurrentMatch] = useState<number>(1);
 	const [match, setMatch] = useState<number>(0);
 
 	const leftIndex = useRef<number>(0);
-	const winners = useRef<candidatesFromServerType[]>([]);
+	const winners = useRef<CandidatesFromServerType[]>([]);
 
 	useEffect(() => {
 		setMatch(round / 2);
@@ -48,7 +27,7 @@ const WorldCupPage = () => {
 		setCandidates(candidatesFromServer);
 	}, []);
 
-	const handleClickCandidate = (el: candidatesFromServerType) => {
+	const handleClickCandidate = (el: CandidatesFromServerType) => {
 		winners.current.push(el);
 
 		setCurrentMatch((prev) => ++prev);
