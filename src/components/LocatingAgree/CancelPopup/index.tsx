@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import { Popup } from '~/components/shared';
+import colors from '~/styles/colors';
 
 interface Props {
 	onClose: () => void;
@@ -77,7 +78,7 @@ const Button = styled.button`
 `;
 
 const AgreeButton = styled(Button)`
-	background-color: #ff5e60;
+	background-color: ${colors.red};
 	color: #ffffff;
 	font-weight: 500;
 	font-size: 16px;

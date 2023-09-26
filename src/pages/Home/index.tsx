@@ -4,6 +4,8 @@ import styled from '@emotion/styled';
 
 import { ROUND } from './index.consts';
 
+import colors from '~/styles/colors';
+
 function Home() {
 	return (
 		<Container>
@@ -78,7 +80,7 @@ const StartButton = styled.button`
 	margin: 0 28px 32px;
 	border-radius: 12px;
 	outline: none;
-	background-color: #ff5e60;
+	background-color: ${colors.red};
 	color: #fff;
 	font-size: 15px;
 	font-weight: 600;
