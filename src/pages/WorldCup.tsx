@@ -59,9 +59,8 @@ const WorldCupPage = () => {
 			leftIndex.current = 0;
 
 			if (winners.current.length === 1 && match === 1) {
-				// 결과 페이지로 이동
-				// navigate('/world-cup-result');
-				navigate('/home');
+				navigate('/world-cup/result', { state: { result: winners.current[0] } });
+
 				return;
 			}
 

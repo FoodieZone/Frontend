@@ -19,7 +19,7 @@ const routeData: RouterBase[] = [
 	},
 	{
 		id: 'LocationInformationAgree',
-		path: '/location_agree',
+		path: '/location-agree',
 		element: <LocationAgree />,
 	},
 	{
@@ -39,7 +39,7 @@ const routeData: RouterBase[] = [
 	},
 	{
 		id: 'WorldCupResult',
-		path: '/world_cup/result',
+		path: '/world-cup/result',
 		element: <WorldCupResult />,
 	},
 ];
