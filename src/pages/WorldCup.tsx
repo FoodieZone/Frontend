@@ -5,7 +5,7 @@ import CoffeeCup from '@assets/png/CoffeeCup.png';
 import Pizza from '@assets/png/Pizza.png';
 import Sandwich from '@assets/png/Sandwich.png';
 import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type candidatesFromServerType = { name: string; image: string };
 
@@ -30,31 +30,35 @@ const candidatesFromServer = [
 
 const WorldCupPage = () => {
 	const navigate = useNavigate();
+	const {
+		state: { round },
+	} = useLocation();
 
 	const [candidates, setCandidates] = useState<candidatesFromServerType[]>();
-	const [currentRound, setCurrentRound] = useState<number>(1);
-	const [round, setRound] = useState<number>(0);
+	const [currentMatch, setCurrentMatch] = useState<number>(1);
+	const [match, setMatch] = useState<number>(0);
 
 	const leftIndex = useRef<number>(0);
 	const winners = useRef<candidatesFromServerType[]>([]);
 
 	useEffect(() => {
+		setMatch(round / 2);
+
 		// 서버 요청
 		setCandidates(candidatesFromServer);
-		setRound(candidatesFromServer.length / 2);
 	}, []);
 
 	const handleClickCandidate = (el: candidatesFromServerType) => {
 		winners.current.push(el);
 
-		setCurrentRound((prev) => ++prev);
+		setCurrentMatch((prev) => ++prev);
 		leftIndex.current = leftIndex.current += 2;
 
-		if (winners.current.length === round) {
+		if (winners.current.length === match) {
 			setCandidates(winners.current);
 			leftIndex.current = 0;
 
-			if (winners.current.length === 1 && round === 1) {
+			if (winners.current.length === 1 && match === 1) {
 				// 결과 페이지로 이동
 				// navigate('/world-cup-result');
 				navigate('/home');
@@ -62,8 +66,8 @@ const WorldCupPage = () => {
 			}
 
 			winners.current = [];
-			setCurrentRound(0);
-			setRound((prev) => prev / 2);
+			setCurrentMatch(0);
+			setMatch((prev) => prev / 2);
 		}
 	};
 
@@ -71,7 +75,7 @@ const WorldCupPage = () => {
 		<Container>
 			<Title>Choice Food</Title>
 			<SubTitle>
-				{currentRound} / {round}
+				{currentMatch} / {match}
 			</SubTitle>
 			<CandidatesWrapper>
 				{candidates?.slice(leftIndex.current, leftIndex.current + 2).map((el, index) => (
