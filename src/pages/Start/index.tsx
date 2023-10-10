@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 
 import { Icon } from '~/components/shared';
-import colors from '~/styles/colors';
 
 function Start() {
 	return (
@@ -72,7 +71,7 @@ const StartButton = styled.button`
 	cursor: pointer;
 	padding: 14px 16px;
 	height: 58px;
-	background-color: ${colors.red};
+	background-color: ${({ theme }) => theme.colors.red};
 	color: #ffffff;
 	font-size: 15px;
 	font-weight: 600;
