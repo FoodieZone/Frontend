@@ -3,7 +3,8 @@ import type { ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from '~/App';
-import { Home, LocationAgree, WorldCupPage, Start, WorldCupResult } from '~/pages';
+import { URL } from '~/constants';
+import { Home, LocationAgree, Start, WorldCupPage, WorldCupResult, Splash, Bridge } from '~/pages';
 
 interface RouterBase {
 	id: string;
@@ -14,33 +15,43 @@ interface RouterBase {
 const routeData: RouterBase[] = [
 	{
 		id: 'Main',
-		path: '/',
+		path: URL.MAIN,
 		element: <App />,
 	},
 	{
 		id: 'LocationInformationAgree',
-		path: '/location-agree',
+		path: URL.LOCATION_INFORMATION_AGREE,
 		element: <LocationAgree />,
 	},
 	{
 		id: 'WorldCup',
-		path: '/world-cup',
+		path: URL.WORLD_CUP.ROUND,
 		element: <WorldCupPage />,
 	},
 	{
 		id: 'Home',
-		path: '/home',
+		path: URL.HOME,
 		element: <Home />,
 	},
 	{
 		id: 'Start',
-		path: '/start',
+		path: URL.START,
 		element: <Start />,
 	},
 	{
 		id: 'WorldCupResult',
-		path: '/world-cup/result',
+		path: URL.WORLD_CUP.RESULT,
 		element: <WorldCupResult />,
+	},
+	{
+		id: 'Bridge',
+		path: URL.BRIDGE,
+		element: <Bridge />,
+	},
+	{
+		id: 'Splash',
+		path: URL.SPLASH,
+		element: <Splash />,
 	},
 ];
 
