@@ -8,7 +8,7 @@ function Home() {
 	return (
 		<Container>
 			<Contents>
-				<Title>{`Welcome\nFoodie Zone`}&nbsp;&nbsp;🍣</Title>
+				<Title>{`푸디존에서\n당신의 최적맛집을 찾아보세요`}&nbsp;&nbsp;😆</Title>
 
 				<SelectRoundButtonWrapper>
 					{Children.toArray(
@@ -42,17 +42,16 @@ const Contents = styled.div`
 `;
 
 const Title = styled.span`
-	margin: 155px 0 0 40px;
+	margin: 195px 0 0 26px;
 	white-space: pre-line;
-	color: #222;
-	font-size: 36px;
-	font-weight: 800;
-	line-height: 44px;
+	color: #000;
+	font-size: 25px;
+	font-weight: 700;
 `;
 
 const SelectRoundButtonWrapper = styled.div`
 	height: 52px;
-	margin: 58px 28px 0;
+	margin: 47px 26px 0;
 	border: 1px solid #e5e7eb;
 	border-radius: 6px;
 	display: flex;
@@ -65,6 +64,10 @@ const SelectRoundButton = styled.label`
 	justify-content: center;
 	align-items: center;
 	flex: 1;
+	color: #111928;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 21px;
 `;
 
 const Divider = styled.div`
@@ -74,8 +77,8 @@ const Divider = styled.div`
 `;
 
 const StartButton = styled.button`
-	height: 50px;
-	margin: 0 28px 32px;
+	height: 56px;
+	margin: 0 27px 32px;
 	border-radius: 12px;
 	outline: none;
 	background-color: #ff5e60;
