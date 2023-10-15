@@ -8,4 +8,5 @@ export const URL = {
 	},
 	SPLASH: '/splash',
 	BRIDGE: '/bridge',
+	RECOMMEND: '/recommend',
 };
