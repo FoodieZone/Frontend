@@ -74,8 +74,6 @@ const Title = styled.span`
 const SelectRoundButtonWrapper = styled.div`
 	height: 52px;
 	margin: 47px 26px 0;
-	border: 1px solid #e5e7eb;
-	border-radius: 6px;
 	display: flex;
 	justify-content: space-evenly;
 `;
@@ -89,16 +87,31 @@ const SelectRoundButton = styled.label<{ isSelected: boolean }>`
 	color: #111928;
 	font-size: 14px;
 	line-height: 21px;
+	border-style: solid;
+
+	&:first-child {
+		border-top-left-radius: 6px;
+		border-bottom-left-radius: 6px;
+		border-width: 1px 0 1px 1px;
+	}
+
+	&:last-child {
+		border-top-right-radius: 6px;
+		border-bottom-right-radius: 6px;
+		border-width: 1px 1px 1px 0;
+	}
 
 	${({ isSelected }) =>
 		isSelected
 			? css`
 					font-weight: 700;
 					background-color: rgba(255, 94, 96, 0.12);
+					border-color: #ff5e60;
 			  `
 			: css`
 					font-weight: 500;
 					background-color: #fff;
+					border-color: #e6e7eb;
 			  `}
 `;
 
