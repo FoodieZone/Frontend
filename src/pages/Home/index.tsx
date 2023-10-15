@@ -1,10 +1,21 @@
-import { Children } from 'react';
+import type { ChangeEvent } from 'react';
+import { Children, useState } from 'react';
 
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+
+import { isNotNull } from '~/utils';
 
 import { ROUND } from './index.consts';
 
 function Home() {
+	const [selectedRound, setSelectedRound] = useState<number | null>(null);
+
+	const handleChangeRound = (e: ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+		setSelectedRound(Number(value));
+	};
+
 	return (
 		<Container>
 			<Contents>
@@ -14,8 +25,19 @@ function Home() {
 					{Children.toArray(
 						ROUND.map((round, index) => (
 							<>
-								<SelectRoundButton>{round.title}</SelectRoundButton>
-								{ROUND.length - 1 !== index && <Divider />}
+								<SelectRoundButton htmlFor={round.title} isSelected={round.value === selectedRound}>
+									<input
+										id={round.title}
+										style={{ display: 'none' }}
+										type="radio"
+										value={round.value}
+										name="round"
+										onChange={handleChangeRound}
+										checked={round.value === selectedRound}
+									/>
+									{round.title}
+								</SelectRoundButton>
+								{ROUND.length - 1 !== index && <Divider isSelected={isNotNull(selectedRound)} />}
 							</>
 						))
 					)}
@@ -58,7 +80,7 @@ const SelectRoundButtonWrapper = styled.div`
 	justify-content: space-evenly;
 `;
 
-const SelectRoundButton = styled.label`
+const SelectRoundButton = styled.label<{ isSelected: boolean }>`
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
@@ -66,14 +88,32 @@ const SelectRoundButton = styled.label`
 	flex: 1;
 	color: #111928;
 	font-size: 14px;
-	font-weight: 500;
 	line-height: 21px;
+
+	${({ isSelected }) =>
+		isSelected
+			? css`
+					font-weight: 700;
+					background-color: rgba(255, 94, 96, 0.12);
+			  `
+			: css`
+					font-weight: 500;
+					background-color: #fff;
+			  `}
 `;
 
-const Divider = styled.div`
+const Divider = styled.div<{ isSelected: boolean }>`
 	width: 1px;
 	height: 100%;
-	background-color: #e6e7eb;
+
+	${({ isSelected }) =>
+		isSelected
+			? css`
+					background-color: #ff5e60;
+			  `
+			: css`
+					background-color: #e6e7eb;
+			  `}
 `;
 
 const StartButton = styled.button`
