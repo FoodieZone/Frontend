@@ -9,14 +9,13 @@ function Recommend() {
 				<Title>근처 햄버거 인기맛집을 추천드려요 !</Title>
 
 				<FoodInfoWrapper>
-					<FoodName>버거운 버거</FoodName>
 					<FoodImage name="image-burger" height={327} />
+					<FoodName>버거운 버거</FoodName>
 					<FoodLocationWrapper>
 						<Icon name="icon-map-pin" width={18} height={18} />
 						<StoreName>버거운 버거</StoreName>
 						<StoreAddress>서울특별시 특별구 특별로 123길 45</StoreAddress>
 					</FoodLocationWrapper>
-					<Divider />
 				</FoodInfoWrapper>
 			</Contents>
 
@@ -41,10 +40,10 @@ const Contents = styled.div`
 `;
 
 const Title = styled.span`
-	margin-top: 51px;
-	color: #757682;
+	margin-top: 67px;
+	color: #000;
 	font-size: 22px;
-	font-weight: 400;
+	font-weight: 700;
 	line-height: 19px;
 `;
 
@@ -57,16 +56,17 @@ const FoodInfoWrapper = styled.div`
 	box-sizing: border-box;
 `;
 
-const FoodName = styled.span`
-	color: #1f2a37;
-	font-size: 18px;
-	font-weight: 700;
-	line-height: 27px;
+const FoodImage = styled(Icon)`
+	margin-top: 93px;
+	border-radius: 16px;
 `;
 
-const FoodImage = styled(Icon)`
-	margin-top: 12px;
-	border-radius: 16px;
+const FoodName = styled.span`
+	margin-top: 24px;
+	color: #1f2a37;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 27px;
 `;
 
 const FoodLocationWrapper = styled.div`
@@ -74,7 +74,7 @@ const FoodLocationWrapper = styled.div`
 	align-items: center;
 	gap: 8px;
 	width: 318px;
-	margin-top: 12px;
+	margin-top: 7px;
 	padding: 8px 10px;
 	border: 1px solid #e5e7eb;
 	border-radius: 8px;
@@ -93,15 +93,8 @@ const StoreAddress = styled.span`
 	font-weight: 500;
 `;
 
-const Divider = styled.div`
-	width: 100%;
-	height: 1px;
-	margin-top: 24px;
-	background-color: #e5e7eb;
-`;
-
 const ShowMoreButton = styled.button`
-	height: 50px;
+	height: 56px;
 	margin: 0 28px 32px;
 	border-radius: 12px;
 	outline: none;
