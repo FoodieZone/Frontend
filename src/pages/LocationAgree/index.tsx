@@ -40,7 +40,7 @@ function LocationAgree() {
 				</Buttons>
 			</Wrapper>
 
-			{!isOpenCancelPopup && <CancelPopup onClose={handleClosePopup} />}
+			{isOpenCancelPopup && <CancelPopup onClose={handleClosePopup} />}
 		</Container>
 	);
 }
