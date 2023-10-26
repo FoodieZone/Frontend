@@ -77,7 +77,7 @@ const Button = styled.button`
 `;
 
 const AgreeButton = styled(Button)`
-	background-color: ${({ theme }) => theme.colors.red};
+	background-color: ${({ theme }) => theme.colors.red[1]};
 	color: #ffffff;
 	font-weight: 500;
 	font-size: 16px;

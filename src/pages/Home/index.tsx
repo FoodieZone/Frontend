@@ -78,7 +78,7 @@ const StartButton = styled.button`
 	margin: 0 28px 32px;
 	border-radius: 12px;
 	outline: none;
-	background-color: ${({ theme }) => theme.colors.red};
+	background-color: ${({ theme }) => theme.colors.red[1]};
 	color: #fff;
 	font-size: 15px;
 	font-weight: 600;
