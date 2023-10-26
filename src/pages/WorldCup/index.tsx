@@ -14,14 +14,14 @@ const WorldCupPage = () => {
 	} = useLocation();
 
 	const [candidates, setCandidates] = useState<CandidatesFromServerType[]>();
-	const [currentMatch, setCurrentMatch] = useState<number>(1);
-	const [match, setMatch] = useState<number>(0);
+	const [totalRound, setTotalRound] = useState<number>(0);
+	const [currentRound, setCurrentRound] = useState<number>(1);
 
 	const leftIndex = useRef<number>(0);
 	const winners = useRef<CandidatesFromServerType[]>([]);
 
 	useEffect(() => {
-		setMatch(round / 2);
+		setTotalRound(round / 2);
 
 		// 서버 요청
 		setCandidates(candidatesFromServer);
@@ -30,31 +30,32 @@ const WorldCupPage = () => {
 	const handleClickCandidate = (el: CandidatesFromServerType) => {
 		winners.current.push(el);
 
-		setCurrentMatch((prev) => ++prev);
+		setCurrentRound((prev) => ++prev);
 		leftIndex.current = leftIndex.current += 2;
 
-		if (winners.current.length === match) {
+		if (winners.current.length === totalRound) {
 			setCandidates(winners.current);
 			leftIndex.current = 0;
 
-			if (winners.current.length === 1 && match === 1) {
+			if (winners.current.length === 1 && totalRound === 1) {
 				navigate('/world-cup/result', { state: { result: winners.current[0] } });
 
 				return;
 			}
 
 			winners.current = [];
-			setCurrentMatch(0);
-			setMatch((prev) => prev / 2);
+			setCurrentRound(0);
+			setTotalRound((prev) => prev / 2);
 		}
 	};
 
 	return (
 		<Container>
+			<RoundMatchInfo>
+				<div>{totalRound}강</div>
+				<div>{currentRound}라운드</div>
+			</RoundMatchInfo>
 			<Title>Choice Food</Title>
-			<SubTitle>
-				{currentMatch} / {match}
-			</SubTitle>
 			<CandidatesWrapper>
 				{candidates?.slice(leftIndex.current, leftIndex.current + 2).map((el, index) => (
 					<Candidate key={`candidate-${el.name}`}>
@@ -68,6 +69,7 @@ const WorldCupPage = () => {
 		</Container>
 	);
 };
+
 export default WorldCupPage;
 
 const Container = styled.div`
@@ -77,7 +79,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-	margin-top: 155px;
+	margin-top: 105px;
 
 	color: #222;
 	font-size: 35px;
@@ -85,9 +87,16 @@ const Title = styled.div`
 	line-height: 44px;
 `;
 
-const SubTitle = styled.span`
-	font-size: 25px;
-	font-weight: 800;
+const RoundMatchInfo = styled.div`
+	width: 90vw;
+
+	display: flex;
+	justify-content: space-between;
+
+	font-size: 19px;
+	font-weight: 500;
+
+	margin-top: 17px;
 `;
 
 const CandidatesWrapper = styled.div`
