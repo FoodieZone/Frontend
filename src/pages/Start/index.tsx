@@ -76,5 +76,4 @@ const StartButton = styled.button`
 	font-weight: 600;
 	line-height: 140%;
 	letter-spacing: -0.408px;
-	line-height: 140%;
 `;
