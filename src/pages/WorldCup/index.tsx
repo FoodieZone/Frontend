@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { wait } from '~/utils';
+
 import { candidatesFromServer } from './index.consts';
 
 import type { CandidatesFromServerType } from './index.types';
@@ -16,6 +18,7 @@ const WorldCupPage = () => {
 	const [candidates, setCandidates] = useState<CandidatesFromServerType[]>();
 	const [totalRound, setTotalRound] = useState<number>(0);
 	const [currentRound, setCurrentRound] = useState<number>(1);
+	const [selectedIndex, setSelectedIndex] = useState<number | undefined>(undefined);
 
 	const leftIndex = useRef<number>(0);
 	const winners = useRef<CandidatesFromServerType[]>([]);
@@ -27,8 +30,13 @@ const WorldCupPage = () => {
 		setCandidates(candidatesFromServer);
 	}, []);
 
-	const handleClickCandidate = (el: CandidatesFromServerType) => {
+	const handleClickCandidate = async (el: CandidatesFromServerType, index: number) => {
 		winners.current.push(el);
+
+		setSelectedIndex(index);
+
+		await wait(500);
+		setSelectedIndex(undefined);
 
 		setCurrentRound((prev) => ++prev);
 		leftIndex.current = leftIndex.current += 2;
@@ -59,7 +67,7 @@ const WorldCupPage = () => {
 			<CandidatesWrapper>
 				{candidates?.slice(leftIndex.current, leftIndex.current + 2).map((el, index) => (
 					<Candidate key={`candidate-${el.name}`}>
-						<CandidateImage onClick={() => handleClickCandidate(el)} index={index}>
+						<CandidateImage onClick={() => handleClickCandidate(el, index)} selected={selectedIndex === index}>
 							<img src={el.image} alt={el.name} width={138} />
 						</CandidateImage>
 						<CandidateName>{el.name}</CandidateName>
@@ -93,6 +101,7 @@ const RoundMatchInfo = styled.div`
 	display: flex;
 	justify-content: space-between;
 
+	color: rgba(148, 0, 0, 0.5);
 	font-size: 19px;
 	font-weight: 500;
 
@@ -114,8 +123,11 @@ const Candidate = styled.div`
 	color: #a4a4a4;
 `;
 
-const CandidateImage = styled.div<{ index: number }>`
-	background-color: ${({ index }) => (index === 0 ? '#ff5e60' : '#EDEDF780')};
+const CandidateImage = styled.div<{ selected: boolean }>`
+	width: 138px;
+	height: 138px;
+
+	background-color: ${({ selected }) => (selected ? '#ff5e60' : 'rgba(237, 237, 247, 0.50)')};
 
 	border-radius: 50%;
 `;
