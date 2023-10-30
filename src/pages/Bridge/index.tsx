@@ -3,17 +3,15 @@ import styled from '@emotion/styled';
 import { Indicator } from '~/components/shared';
 
 function Bridge() {
-	const userName = '회원 닉네임';
-
 	return (
 		<Container>
 			<Wrapper>
 				<Indicator size={200} />
 
 				<Text>
-					{userName}님의 푸디존에서
+					푸디존에서 맞춤형 맛집을
 					<br />
-					맞춤형 맛집을 찾고있습니다! 조금만 기다려주세요🙏🏻
+					찾고있습니다! 조금만 기다려주세요🙏🏻
 				</Text>
 			</Wrapper>
 		</Container>
@@ -42,4 +40,5 @@ const Text = styled.div`
 	font-weight: 400;
 	line-height: 105.556%;
 	letter-spacing: -1.5px;
+	margin-top: 59px;
 `;

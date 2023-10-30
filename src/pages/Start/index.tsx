@@ -6,7 +6,7 @@ function Start() {
 	return (
 		<Container>
 			<Wrapper>
-				<Icon name="logo-small" width={135} />
+				<Icon name="logo-small" width={157} />
 
 				<Contents>
 					<Icon name="icon-food_truck" />
@@ -70,7 +70,6 @@ const StartButton = styled.button`
 	border: none;
 	cursor: pointer;
 	padding: 14px 16px;
-	height: 58px;
 	background-color: #ff5e60;
 	color: #ffffff;
 	font-size: 15px;
