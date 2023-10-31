@@ -4,7 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import App from '~/App';
 import { URL } from '~/constants';
-import { Home, LocationAgree, Start, WorldCupPage, WorldCupResult, Splash, Bridge } from '~/pages';
+import { Home, LocationAgree, Start, WorldCupPage, WorldCupResult, Splash, Bridge, Recommend } from '~/pages';
 
 interface RouterBase {
 	id: string;
@@ -23,11 +23,7 @@ const routeData: RouterBase[] = [
 		path: URL.LOCATION_INFORMATION_AGREE,
 		element: <LocationAgree />,
 	},
-	{
-		id: 'WorldCup',
-		path: URL.WORLD_CUP.ROUND,
-		element: <WorldCupPage />,
-	},
+
 	{
 		id: 'Home',
 		path: URL.HOME,
@@ -37,6 +33,11 @@ const routeData: RouterBase[] = [
 		id: 'Start',
 		path: URL.START,
 		element: <Start />,
+	},
+	{
+		id: 'WorldCup',
+		path: URL.WORLD_CUP.ROUND,
+		element: <WorldCupPage />,
 	},
 	{
 		id: 'WorldCupResult',
@@ -52,6 +53,11 @@ const routeData: RouterBase[] = [
 		id: 'Splash',
 		path: URL.SPLASH,
 		element: <Splash />,
+	},
+	{
+		id: 'Recommend',
+		path: URL.RECOMMEND,
+		element: <Recommend />,
 	},
 ];
 

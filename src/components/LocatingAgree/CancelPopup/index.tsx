@@ -44,7 +44,7 @@ const Texts = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 36px;
-	margin-bottom: 19.2px;
+	margin-bottom: 24px;
 `;
 
 const Strong = styled.div`
@@ -65,7 +65,8 @@ const Buttons = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	align-items: center;
+	gap: 11px;
 `;
 
 const Button = styled.button`
@@ -79,12 +80,12 @@ const Button = styled.button`
 const AgreeButton = styled(Button)`
 	background-color: #ff5e60;
 	color: #ffffff;
-	font-weight: 500;
+	font-weight: 700;
 	font-size: 16px;
 	line-height: 160%;
 `;
 
-const CancelButton = styled(Button)`
+const CancelButton = styled.div`
 	background-color: #ffffff;
 	color: #8e8e93;
 	font-weight: 300;

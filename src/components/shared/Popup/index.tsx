@@ -6,9 +6,10 @@ interface Props {
 	children: ReactNode;
 	onClose: () => void;
 	closeOnDim?: boolean;
+	backgroundOpacity?: number;
 }
 
-function Popup({ children, onClose, closeOnDim = false }: Props) {
+function Popup({ children, onClose, closeOnDim = false, backgroundOpacity = 70 }: Props) {
 	const handleClosePopup = () => {
 		if (closeOnDim) onClose();
 	};
@@ -23,7 +24,7 @@ function Popup({ children, onClose, closeOnDim = false }: Props) {
 
 	return (
 		<Container>
-			<Dim onClick={handleClosePopup} />
+			<Dim onClick={handleClosePopup} backgroundOpacity={backgroundOpacity} />
 			<Contents>{children}</Contents>
 		</Container>
 	);
@@ -40,10 +41,11 @@ const Container = styled.div`
 	height: 100vh;
 `;
 
-const Dim = styled.div`
+const Dim = styled.div<{ backgroundOpacity: number }>`
 	width: 100%;
 	height: 100%;
-	background-color: #00000070;
+	background-color: #000000;
+	opacity: ${({ backgroundOpacity }) => backgroundOpacity / 100};
 `;
 
 const Contents = styled.div`
