@@ -16,7 +16,7 @@ const WorldCupPage = () => {
 	} = useLocation();
 
 	const [candidates, setCandidates] = useState<CandidatesFromServerType[]>();
-	const [totalRound, setTotalRound] = useState<number>(0);
+	const [roundCount, setRoundCount] = useState<number>(0);
 	const [currentRound, setCurrentRound] = useState<number>(1);
 	const [selectedIndex, setSelectedIndex] = useState<number | undefined>(undefined);
 
@@ -24,7 +24,7 @@ const WorldCupPage = () => {
 	const winners = useRef<CandidatesFromServerType[]>([]);
 
 	useEffect(() => {
-		setTotalRound(round / 2);
+		setRoundCount(round / 2);
 
 		// 서버 요청
 		setCandidates(candidatesFromServer);
@@ -41,26 +41,26 @@ const WorldCupPage = () => {
 		setCurrentRound((prev) => ++prev);
 		leftIndex.current = leftIndex.current += 2;
 
-		if (winners.current.length === totalRound) {
+		if (winners.current.length === roundCount) {
 			setCandidates(winners.current);
 			leftIndex.current = 0;
 
-			if (winners.current.length === 1 && totalRound === 1) {
+			if (winners.current.length === 1 && roundCount === 1) {
 				navigate('/world-cup/result', { state: { result: winners.current[0] } });
 
 				return;
 			}
 
 			winners.current = [];
-			setCurrentRound(0);
-			setTotalRound((prev) => prev / 2);
+			setCurrentRound(1);
+			setRoundCount((prev) => prev / 2);
 		}
 	};
 
 	return (
 		<Container>
 			<RoundMatchInfo>
-				<div>{totalRound}강</div>
+				<div>{roundCount * 2}강</div>
 				<div>{currentRound}라운드</div>
 			</RoundMatchInfo>
 			<Title>Choice Food</Title>
