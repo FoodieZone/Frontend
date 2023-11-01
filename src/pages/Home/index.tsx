@@ -118,15 +118,7 @@ const SelectRoundButton = styled.label<{ isSelected: boolean }>`
 const Divider = styled.div<{ isSelected: boolean }>`
 	width: 1px;
 	height: 100%;
-
-	${({ isSelected }) =>
-		isSelected
-			? css`
-					background-color: #ff5e60;
-			  `
-			: css`
-					background-color: #e6e7eb;
-			  `}
+	background-color: ${({ isSelected }) => (isSelected ? '#ff5e60' : '#e6e7eb')};
 `;
 
 const StartButton = styled.button`
