@@ -37,20 +37,17 @@ const WorldCupPage = () => {
 
 		await wait(500);
 		setSelectedIndex(undefined);
-
 		setCurrentRound((prev) => ++prev);
 		leftIndex.current = leftIndex.current += 2;
 
 		if (winners.current.length === roundCount) {
-			setCandidates(winners.current);
-			leftIndex.current = 0;
-
-			if (winners.current.length === 1 && roundCount === 1) {
+			if (roundCount === 1) {
 				navigate('/world-cup/result', { state: { result: winners.current[0] } });
-
 				return;
 			}
 
+			setCandidates(winners.current);
+			leftIndex.current = 0;
 			winners.current = [];
 			setCurrentRound(1);
 			setRoundCount((prev) => prev / 2);
@@ -87,7 +84,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-	margin-top: 105px;
+	margin-top: 10vh;
 
 	color: #222;
 	font-size: 35px;
@@ -130,6 +127,7 @@ const CandidateImage = styled.div<{ selected: boolean }>`
 	background-color: ${({ selected }) => (selected ? '#ff5e60' : 'rgba(237, 237, 247, 0.50)')};
 
 	border-radius: 50%;
+	transition: background-color 0.5s ease;
 `;
 
 const CandidateName = styled.div`
