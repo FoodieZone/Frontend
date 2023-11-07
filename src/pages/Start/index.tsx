@@ -6,7 +6,7 @@ function Start() {
 	return (
 		<Container>
 			<Wrapper>
-				<Icon name="logo-small" width={135} />
+				<Icon name="logo-small" width={157} />
 
 				<Contents>
 					<Icon name="icon-food_truck" />

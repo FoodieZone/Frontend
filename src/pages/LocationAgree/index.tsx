@@ -9,18 +9,18 @@ import { Icon } from '~/components/shared';
 
 function LocationAgree() {
 	const { geoLocating } = useGeoLocation({ pending: true });
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpenCancelPopup, setIsOpenCancelPopup] = useState(false);
 
 	const handleClickAgree = () => {
 		geoLocating();
 	};
 
 	const handleClickCancel = () => {
-		setIsOpen(true);
+		setIsOpenCancelPopup(true);
 	};
 
 	const handleClosePopup = () => {
-		setIsOpen(false);
+		setIsOpenCancelPopup(false);
 	};
 
 	return (
@@ -40,7 +40,7 @@ function LocationAgree() {
 				</Buttons>
 			</Wrapper>
 
-			{isOpen && <CancelPopup onClose={handleClosePopup} />}
+			{isOpenCancelPopup && <CancelPopup onClose={handleClosePopup} />}
 		</Container>
 	);
 }
@@ -91,7 +91,7 @@ const Notice = styled.span`
 `;
 
 const Buttons = styled.div`
-	margin-top: 32px;
+	margin-top: 44px;
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
@@ -120,4 +120,5 @@ const Agree = styled(Button)`
 const Cancel = styled(Button)`
 	color: #8e8e93;
 	background-color: #ffffff;
+	font-weight: 300;
 `;

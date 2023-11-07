@@ -4,7 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import App from '~/App';
 import { URL } from '~/constants';
-import { Home, LocationAgree, Start, WorldCupResult, Splash, Bridge } from '~/pages';
+import { Home, LocationAgree, Start, WorldCupResult, Splash, Bridge, Recommend } from '~/pages';
 
 interface RouterBase {
 	id: string;
@@ -47,6 +47,11 @@ const routeData: RouterBase[] = [
 		id: 'Splash',
 		path: URL.SPLASH,
 		element: <Splash />,
+	},
+	{
+		id: 'Recommend',
+		path: URL.RECOMMEND,
+		element: <Recommend />,
 	},
 ];
 
