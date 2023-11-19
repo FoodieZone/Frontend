@@ -6,6 +6,8 @@ import App from '~/App';
 import { URL } from '~/constants';
 import { Home, LocationAgree, Start, WorldCupResult, Splash, Bridge, Recommend } from '~/pages';
 
+import KakaoMapPage from '~/pages/KakaoMap';
+
 interface RouterBase {
 	id: string;
 	path: string;
@@ -52,6 +54,11 @@ const routeData: RouterBase[] = [
 		id: 'Recommend',
 		path: URL.RECOMMEND,
 		element: <Recommend />,
+	},
+	{
+		id: 'KakaoMap',
+		path: URL.KAKAO_MAP,
+		element: <KakaoMapPage />,
 	},
 ];
 

@@ -9,4 +9,5 @@ export const URL = {
 	SPLASH: '/splash',
 	BRIDGE: '/bridge',
 	RECOMMEND: '/recommend',
+	KAKAO_MAP: '/kakao-map',
 };
