@@ -2,9 +2,9 @@ import { Children } from 'react';
 
 import styled from '@emotion/styled';
 
-import SheetCard from './SheetCard';
+import type { Restaurant } from '~/interfaces';
 
-import type { Restaurant } from '../index.types';
+import SheetCard from './SheetCard';
 
 interface Props {
 	items: Restaurant[];

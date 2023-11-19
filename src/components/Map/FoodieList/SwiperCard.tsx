@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import type { Restaurant } from '../index.types';
+import type { Restaurant } from '~/interfaces';
 
 import { Icon } from '~/components/shared';
 

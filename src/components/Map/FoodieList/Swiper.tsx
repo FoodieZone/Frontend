@@ -2,9 +2,9 @@ import { Children, useMemo } from 'react';
 
 import Slider from 'react-slick';
 
-import SwiperCard from './SwiperCard';
+import type { Restaurant } from '~/interfaces';
 
-import type { Restaurant } from '../index.types';
+import SwiperCard from './SwiperCard';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import styled from '@emotion/styled';
 
+import type { Restaurant } from '~/interfaces';
+
 import Sheet from './Sheet';
 import Swiper from './Swiper';
-
-import type { Restaurant } from '../index.types';
 
 import { Icon } from '~/components/shared';
 
