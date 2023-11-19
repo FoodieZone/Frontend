@@ -12,6 +12,7 @@ interface Props {
 
 function SheetCard({ item }: Props) {
 	const { image, address, name, foodName, distance, kakaoMapsId } = item;
+	const transDistance = `${distance / 1000}km`;
 
 	const handleClickCard = () => {
 		window.open(`https://map.kakao.com/link/map/${kakaoMapsId}`, '_blank');
@@ -27,7 +28,7 @@ function SheetCard({ item }: Props) {
 					<Icon name="icon-location" width={13} height={12} />
 					<AddressTitle>{address}</AddressTitle>
 				</Address>
-				<Info>{`${foodName} ${distance}`}</Info>
+				<Info>{`${foodName} ${transDistance}`}</Info>
 			</Contents>
 		</Container>
 	);
