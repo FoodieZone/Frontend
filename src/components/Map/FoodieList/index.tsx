@@ -17,6 +17,7 @@ const swiperMock: Restaurant[] = [
 		name: '바스버거 역삼점',
 		foodName: '햄버거',
 		distance: 84.0,
+		kakaoMapsId: '218274780',
 	},
 	{
 		lng: 127.02568305264,
@@ -25,6 +26,7 @@ const swiperMock: Restaurant[] = [
 		name: '파이브가이즈 강남',
 		foodName: '햄버거',
 		distance: 943.0,
+		kakaoMapsId: '1725176424',
 	},
 	{
 		lng: 127.03241956181776,
@@ -33,6 +35,7 @@ const swiperMock: Restaurant[] = [
 		name: '데일리픽스',
 		foodName: '햄버거',
 		distance: 444.0,
+		kakaoMapsId: '717158192',
 	},
 	{
 		lng: 127.029332806632,
@@ -41,38 +44,7 @@ const swiperMock: Restaurant[] = [
 		name: '파파이스 강남점',
 		foodName: '햄버거',
 		distance: 996.0,
-	},
-	{
-		lng: 127.034379691839,
-		lat: 37.5009759812561,
-		address: '서울 강남구 역삼동 644-5',
-		name: '스매쉬치즈버거',
-		foodName: '햄버거',
-		distance: 185.0,
-	},
-	{
-		lng: 127.024455630304,
-		lat: 37.5034670305094,
-		address: '서울 서초구 서초동 1303-31',
-		name: '슈퍼두퍼 강남점',
-		foodName: '햄버거',
-		distance: 1104.0,
-	},
-	{
-		lng: 127.0317430144742,
-		lat: 37.49706635210059,
-		address: '서울 강남구 역삼동 827-49',
-		name: '크라이치즈버거 강남점',
-		foodName: '햄버거',
-		distance: 539.0,
-	},
-	{
-		lng: 127.02857422109,
-		lat: 37.4996503462515,
-		address: '서울 강남구 역삼동 818-11',
-		name: '칙바이칙 강남역점',
-		foodName: '햄버거',
-		distance: 687.0,
+		kakaoMapsId: '772414643',
 	},
 ];
 

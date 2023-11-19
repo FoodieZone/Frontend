@@ -6,4 +6,5 @@ export interface Restaurant {
 	name: string;
 	foodName: string;
 	distance: number;
+	kakaoMapsId: string;
 }

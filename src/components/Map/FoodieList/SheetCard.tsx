@@ -11,10 +11,14 @@ interface Props {
 }
 
 function SheetCard({ item }: Props) {
-	const { image, address, name, foodName, distance } = item;
+	const { image, address, name, foodName, distance, kakaoMapsId } = item;
+
+	const handleClickCard = () => {
+		window.open(`https://map.kakao.com/link/map/${kakaoMapsId}`, '_blank');
+	};
 
 	return (
-		<Container>
+		<Container onClick={handleClickCard}>
 			<Image src={image ?? defaultImage} />
 
 			<Contents>
