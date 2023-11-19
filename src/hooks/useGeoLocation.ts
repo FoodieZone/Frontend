@@ -1,15 +1,19 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { useRecoilState } from 'recoil';
+
+import { locationState } from '~/stores/location';
+
 interface Props {
 	pending: boolean;
 }
 
 function useGeoLocation({ pending = false }: Props) {
+	const [location, setLocation] = useRecoilState(locationState);
+
 	const [isLocating, setIsLocating] = useState(false);
 	const [isLocated, setIsLocated] = useState(false);
 	const [isFail, setIsFail] = useState(false);
-	const [latitude, setLatitude] = useState(0);
-	const [longitude, setLongitude] = useState(0);
 
 	const options: PositionOptions = useMemo(
 		() => ({
@@ -23,8 +27,10 @@ function useGeoLocation({ pending = false }: Props) {
 	const success = (position: GeolocationPosition) => {
 		const { coords } = position;
 
-		setLatitude(coords.latitude);
-		setLongitude(coords.longitude);
+		setLocation({
+			latitude: coords.latitude,
+			longitude: coords.longitude,
+		});
 
 		setIsLocated(true);
 		setIsLocating(false);
@@ -55,8 +61,7 @@ function useGeoLocation({ pending = false }: Props) {
 		isFail,
 		isLocated,
 		isLocating,
-		latitude,
-		longitude,
+		location,
 		geoLocating,
 	};
 }

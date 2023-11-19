@@ -4,6 +4,7 @@ import { Global, ThemeProvider } from '@emotion/react';
 import router from '@routes/index';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 
 import BaseLayout from './components/BaseLayout';
 import reportWebVitals from './reportWebVitals';
@@ -14,8 +15,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<BaseLayout>
 			<ThemeProvider theme={theme}>
-				<Global styles={reset} />
-				<RouterProvider router={router} />
+				<RecoilRoot>
+					<Global styles={reset} />
+					<RouterProvider router={router} />
+				</RecoilRoot>
 			</ThemeProvider>
 		</BaseLayout>
 	</React.StrictMode>
