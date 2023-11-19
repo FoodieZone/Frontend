@@ -131,6 +131,10 @@ function FoodieList() {
 		setOpenSheet(false);
 	};
 
+	const handleClickHomeButton = () => {
+		window.location.href = '/';
+	};
+
 	return (
 		<Container>
 			<Header>
@@ -148,7 +152,7 @@ function FoodieList() {
 			{openSheet && <Sheet items={swiperMock} onClose={handleCloseSheet} />}
 			<Swiper items={swiperMock} />
 
-			<RestartButton>홈으로가기</RestartButton>
+			<RestartButton onClick={handleClickHomeButton}>홈으로가기</RestartButton>
 		</Container>
 	);
 }
