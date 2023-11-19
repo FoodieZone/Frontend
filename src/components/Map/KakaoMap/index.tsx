@@ -1,30 +1,58 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ForwardedRef } from 'react';
-import { forwardRef, useEffect } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
+
+import { isEmpty } from 'lodash';
 
 import { makeCustomOverlay } from '~/utils';
 
-import { swiperMock } from '../FoodieList';
+import FoodieList, { swiperMock } from '../FoodieList';
 
 interface KakaoMapProps {
 	kakaoMap: any;
 }
 
 const KakaoMap = forwardRef(({ kakaoMap }: KakaoMapProps, ref: ForwardedRef<HTMLDivElement>) => {
+	const [focusedItemIndex, setFocusedItemIndex] = useState<number>(0);
+
+	const [customOverlayList, setCustomOverlayList] = useState<any[]>([]);
+
 	useEffect(() => {
-		swiperMock.forEach((mock) => {
-			const customOverlay = new window.kakao.maps.CustomOverlay({
-				kakaoMap,
-				clickable: true,
-				position: new window.kakao.maps.LatLng(mock.lat, mock.lng),
-				content: makeCustomOverlay(mock),
-			});
+		setCustomOverlayList(
+			swiperMock.map(
+				(mock, index) =>
+					new window.kakao.maps.CustomOverlay({
+						kakaoMap,
+						clickable: true,
+						position: new window.kakao.maps.LatLng(mock.lat, mock.lng),
+						content: makeCustomOverlay(mock, index === focusedItemIndex),
+					})
+			)
+		);
 
-			customOverlay.setMap(kakaoMap);
-		});
-	}, [kakaoMap]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [focusedItemIndex]);
 
-	return <div ref={ref} />;
+	useEffect(() => {
+		if (isEmpty(customOverlayList)) {
+			return;
+		}
+
+		customOverlayList.forEach((customOverlay) => customOverlay.setMap(kakaoMap));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [customOverlayList]);
+
+	const handleChangeFocusedItemIndex = (index: number) => {
+		customOverlayList.forEach((customOverlay) => customOverlay.setMap(null));
+		setFocusedItemIndex(index);
+	};
+
+	return (
+		<>
+			<div ref={ref} />
+			<FoodieList handleChangeFocusedItemIndex={handleChangeFocusedItemIndex} />
+		</>
+	);
 });
 
 KakaoMap.displayName = 'KakaoMap';

@@ -7,7 +7,7 @@ import { isNull } from 'lodash';
 import { FullPageLoading } from '~/components';
 import { useGeoLocation } from '~/hooks';
 
-import { FoodieList, KakaoMap } from '~/components/Map';
+import { KakaoMap } from '~/components/Map';
 
 declare global {
 	interface Window {
@@ -79,8 +79,6 @@ function MapPage() {
 	return (
 		<Container>
 			<KakaoMap kakaoMap={kakaoMap} ref={mapRef} />
-
-			<FoodieList />
 		</Container>
 	);
 }

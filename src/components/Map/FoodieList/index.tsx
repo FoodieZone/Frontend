@@ -45,81 +45,13 @@ export const swiperMock: Restaurant[] = [
 		distance: 996.0,
 		kakaoMapsId: '772414643',
 	},
-	{
-		lng: 127.03241956181776,
-		lat: 37.49775543833608,
-		address: '서울 강남구 역삼동 823-16',
-		name: '데일리픽스',
-		foodName: '햄버거',
-		distance: 444.0,
-		kakaoMapsId: '717158192',
-	},
-	{
-		lng: 127.029332806632,
-		lat: 37.4932485081661,
-		address: '서울 서초구 서초동 1329-8',
-		name: '파파이스 강남점',
-		foodName: '햄버거',
-		distance: 996.0,
-		kakaoMapsId: '772414643',
-	},
-	{
-		lng: 127.03241956181776,
-		lat: 37.49775543833608,
-		address: '서울 강남구 역삼동 823-16',
-		name: '데일리픽스',
-		foodName: '햄버거',
-		distance: 444.0,
-		kakaoMapsId: '717158192',
-	},
-	{
-		lng: 127.029332806632,
-		lat: 37.4932485081661,
-		address: '서울 서초구 서초동 1329-8',
-		name: '파파이스 강남점',
-		foodName: '햄버거',
-		distance: 996.0,
-		kakaoMapsId: '772414643',
-	},
-	{
-		lng: 127.03241956181776,
-		lat: 37.49775543833608,
-		address: '서울 강남구 역삼동 823-16',
-		name: '데일리픽스',
-		foodName: '햄버거',
-		distance: 444.0,
-		kakaoMapsId: '717158192',
-	},
-	{
-		lng: 127.029332806632,
-		lat: 37.4932485081661,
-		address: '서울 서초구 서초동 1329-8',
-		name: '파파이스 강남점',
-		foodName: '햄버거',
-		distance: 996.0,
-		kakaoMapsId: '772414643',
-	},
-	{
-		lng: 127.03241956181776,
-		lat: 37.49775543833608,
-		address: '서울 강남구 역삼동 823-16',
-		name: '데일리픽스',
-		foodName: '햄버거',
-		distance: 444.0,
-		kakaoMapsId: '717158192',
-	},
-	{
-		lng: 127.029332806632,
-		lat: 37.4932485081661,
-		address: '서울 서초구 서초동 1329-8',
-		name: '파파이스 강남점',
-		foodName: '햄버거',
-		distance: 996.0,
-		kakaoMapsId: '772414643',
-	},
 ];
 
-function FoodieList() {
+interface FoodieListProps {
+	handleChangeFocusedItemIndex: (index: number) => void;
+}
+
+function FoodieList({ handleChangeFocusedItemIndex }: FoodieListProps) {
 	const [openSheet, setOpenSheet] = useState(false);
 	const [selectedRestaurant] = useState(swiperMock[0]);
 
@@ -150,7 +82,7 @@ function FoodieList() {
 			</ListButton>
 
 			{openSheet && <Sheet items={swiperMock} onClose={handleCloseSheet} />}
-			<Swiper items={swiperMock} />
+			<Swiper items={swiperMock} onFocusItem={handleChangeFocusedItemIndex} />
 
 			<RestartButton onClick={handleClickHomeButton}>홈으로가기</RestartButton>
 		</Container>
