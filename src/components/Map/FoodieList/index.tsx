@@ -8,7 +8,7 @@ import type { Restaurant } from '~/interfaces';
 import Sheet from './Sheet';
 import Swiper from './Swiper';
 
-const swiperMock: Restaurant[] = [
+export const swiperMock: Restaurant[] = [
 	{
 		lng: 127.0358379250339,
 		lat: 37.499633048878934,

@@ -6,6 +6,8 @@ import { isNull } from 'lodash';
 import { FullPageLoading } from '~/components';
 import { useGeoLocation } from '~/hooks';
 
+import { KakaoMap } from '~/components/Map';
+
 declare global {
 	interface Window {
 		kakao: any;
@@ -14,9 +16,8 @@ declare global {
 
 const { kakao } = window;
 
-function KakaoMapPage() {
+function MapPage() {
 	const mapRef = useRef<HTMLDivElement>(null);
-
 	const [kakaoMap, setKakaoMap] = useState<any>(null);
 	const { latitude, longitude, isLocating } = useGeoLocation({ pending: false });
 
@@ -33,7 +34,7 @@ function KakaoMapPage() {
 		const map = new kakao.maps.Map(mapRef.current, options);
 
 		setKakaoMap(map);
-	}, [isLocating, latitude, longitude, mapRef]);
+	}, [isLocating, latitude, longitude, mapRef, setKakaoMap]);
 
 	useEffect(() => {
 		if (isNull(kakaoMap)) {
@@ -51,7 +52,7 @@ function KakaoMapPage() {
 
 		kakaoMap.relayout();
 		kakaoMap.setCenter(center);
-	}, [kakaoMap]);
+	}, [kakaoMap, mapRef]);
 
 	if (isLocating) {
 		return (
@@ -63,7 +64,7 @@ function KakaoMapPage() {
 		);
 	}
 
-	return <div ref={mapRef} />;
+	return <KakaoMap kakaoMap={kakaoMap} ref={mapRef} />;
 }
 
-export default KakaoMapPage;
+export default MapPage;
