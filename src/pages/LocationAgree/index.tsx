@@ -2,10 +2,8 @@ import { useState } from 'react';
 
 import styled from '@emotion/styled';
 
+import { CancelPopup, Icon } from '~/components';
 import { useGeoLocation } from '~/hooks';
-
-import { CancelPopup } from '~/components/LocatingAgree';
-import { Icon } from '~/components/shared';
 
 function LocationAgree() {
 	const { geoLocating } = useGeoLocation({ pending: true });

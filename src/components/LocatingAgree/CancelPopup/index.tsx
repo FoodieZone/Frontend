@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { Popup } from '~/components/shared';
+import { Popup } from '~/components';
 
 interface Props {
 	onClose: () => void;

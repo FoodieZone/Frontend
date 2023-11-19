@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { Icon } from '~/components/shared';
+import { Icon } from '~/components';
 
 function Recommend() {
 	return (

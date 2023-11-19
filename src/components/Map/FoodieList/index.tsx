@@ -2,12 +2,11 @@ import { useState } from 'react';
 
 import styled from '@emotion/styled';
 
+import { Icon } from '~/components';
 import type { Restaurant } from '~/interfaces';
 
 import Sheet from './Sheet';
 import Swiper from './Swiper';
-
-import { Icon } from '~/components/shared';
 
 const swiperMock: Restaurant[] = [
 	{

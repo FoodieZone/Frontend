@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
-import { Icon } from '~/components/shared';
+import { Icon } from '~/components';
 function Splash() {
 	const navigate = useNavigate();
 

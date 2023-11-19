@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
 
+import { Icon } from '~/components';
 import type { Restaurant } from '~/interfaces';
-
-import { Icon } from '~/components/shared';
 
 const defaultImage = 'https://students.senecacollege.ca/assets/Themes/default/images/album-default.png';
 

@@ -3,9 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import { isNull } from 'lodash';
 
+import { FullPageLoading } from '~/components';
 import { useGeoLocation } from '~/hooks';
-
-import FullPageLoading from '~/components/shared/FullPageLoading';
 
 declare global {
 	interface Window {
