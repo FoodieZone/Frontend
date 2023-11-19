@@ -10,7 +10,7 @@ import { useGeoLocation } from '~/hooks';
 import { MOCK_RESTAURANTS } from '../Home/index.consts';
 
 import { CancelPopup } from '~/components/LocatingAgree';
-import { Icon } from '~/components/shared';
+import { FullPageLoading, Icon } from '~/components/shared';
 import { candidateState } from '~/stores/candidate';
 
 function LocationAgree() {
@@ -28,7 +28,11 @@ function LocationAgree() {
 
 			setCategories(MOCK_RESTAURANTS.foods);
 
-			MOCK_RESTAURANTS.round === 16 ? navigate(URL.HOME) : navigate(URL.WORLD_CUP.ROUND);
+			if (MOCK_RESTAURANTS.round === 16) {
+				navigate(URL.HOME);
+			} else {
+				navigate(URL.WORLD_CUP.ROUND);
+			}
 		}
 	}, [isLocated]);
 
@@ -45,7 +49,7 @@ function LocationAgree() {
 	};
 
 	if (isLocating) {
-		return <div>FullPageLoading</div>;
+		return <FullPageLoading />;
 	}
 
 	return (

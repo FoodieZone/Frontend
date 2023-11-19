@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
-import { URL } from '~/constants';
-
 import { Icon } from '~/components';
+import { URL } from '~/constants';
 
 function Start() {
 	const navigate = useNavigate();
