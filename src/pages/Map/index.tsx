@@ -19,8 +19,10 @@ const { kakao } = window;
 
 function MapPage() {
 	const mapRef = useRef<HTMLDivElement>(null);
-	const [kakaoMap, setKakaoMap] = useState<any>(null);
+
 	const { latitude, longitude, isLocating } = useGeoLocation({ pending: false });
+
+	const [kakaoMap, setKakaoMap] = useState<any>(null);
 
 	useEffect(() => {
 		if (isLocating) {
