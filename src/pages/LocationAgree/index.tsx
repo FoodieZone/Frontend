@@ -113,7 +113,7 @@ const Button = styled.button`
 const Agree = styled(Button)`
 	// TODO: 색상 팔레트를 만들어서 관리하도록 수정해야한다.
 	color: #ffffff;
-	background-color: #ff5e60;
+	background-color: ${({ theme }) => theme.colors.red[1]};
 	font-weight: 600;
 `;
 

@@ -70,7 +70,8 @@ const StartButton = styled.button`
 	border: none;
 	cursor: pointer;
 	padding: 14px 16px;
-	background-color: #ff5e60;
+	height: 58px;
+	background-color: ${({ theme }) => theme.colors.red[1]};
 	color: #ffffff;
 	font-size: 15px;
 	font-weight: 600;
