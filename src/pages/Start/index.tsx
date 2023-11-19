@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { URL } from '~/constants';
 
-import { Icon } from '~/components/shared';
+import { Icon } from '~/components';
 
 function Start() {
 	const navigate = useNavigate();

@@ -1,24 +1,25 @@
+import type { PropsWithChildren } from 'react';
+
 import styled from '@emotion/styled';
 
-import { Indicator } from '~/components/shared';
+import Indicator from '../Indicator';
 
-function Bridge() {
+interface FullPageLoadingProps extends PropsWithChildren {
+	loaderSize?: number;
+}
+
+function FullPageLoading({ children, loaderSize = 200 }: FullPageLoadingProps) {
 	return (
 		<Container>
 			<Wrapper>
-				<Indicator size={200} />
-
-				<Text>
-					푸디존에서 맞춤형 맛집을
-					<br />
-					찾고있습니다! 조금만 기다려주세요🙏🏻
-				</Text>
+				<Indicator size={loaderSize} />
+				<Text>{children}</Text>
 			</Wrapper>
 		</Container>
 	);
 }
 
-export default Bridge;
+export default FullPageLoading;
 
 const Container = styled.div`
 	height: 100%;
