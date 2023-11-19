@@ -5,4 +5,4 @@ export { default as Start } from './Start';
 export { default as WorldCupResult } from './WorldCupResult';
 export { default as Splash } from './Splash';
 export { default as Recommend } from './Recommend';
-export { default as KakaoMap } from './KakaoMap';
+export { default as Map } from './Map';

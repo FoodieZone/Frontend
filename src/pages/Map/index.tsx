@@ -14,7 +14,7 @@ declare global {
 
 const { kakao } = window;
 
-function KakaoMapPage() {
+function MapPage() {
 	const mapRef = useRef<HTMLDivElement>(null);
 
 	const [kakaoMap, setKakaoMap] = useState<any>(null);
@@ -66,4 +66,4 @@ function KakaoMapPage() {
 	return <div ref={mapRef} />;
 }
 
-export default KakaoMapPage;
+export default MapPage;

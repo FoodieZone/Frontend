@@ -9,5 +9,5 @@ export const URL = {
 	},
 	SPLASH: '/splash',
 	RECOMMEND: '/recommend',
-	KAKAO_MAP: '/kakao-map',
+	MAP: '/map',
 };
