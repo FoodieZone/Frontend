@@ -9,10 +9,10 @@ interface Props {
 	item: Restaurant;
 }
 function SwiperCard({ item }: Props) {
-	const { image, name, address } = item;
+	const { image, name, address, kakaoMapsId } = item;
 
 	const handleClickItem = () => {
-		console.log('click');
+		window.open(`https://map.kakao.com/link/map/${kakaoMapsId}`, '_blank');
 	};
 
 	return (

@@ -65,6 +65,7 @@ const Address = styled.div`
 	display: flex;
 	gap: 2px;
 	align-items: center;
+	margin: 11.5px 0 4.5px;
 `;
 
 const AddressTitle = styled.div`
@@ -72,7 +73,6 @@ const AddressTitle = styled.div`
 	font-weight: 500;
 	line-height: 150%;
 	color: ${({ theme }) => theme.colors.gray[2]};
-	margin: 11.5px 0 4.5px;
 `;
 
 const Info = styled.div`
