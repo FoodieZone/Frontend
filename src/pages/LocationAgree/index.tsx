@@ -1,15 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
+import { URL } from '~/constants';
 import { useGeoLocation } from '~/hooks';
 
 import { CancelPopup } from '~/components/LocatingAgree';
 import { Icon } from '~/components/shared';
 
 function LocationAgree() {
-	const { geoLocating } = useGeoLocation({ pending: true });
+	const navigate = useNavigate();
+	const { geoLocating, isLocating, isLocated } = useGeoLocation({ pending: true });
+
 	const [isOpenCancelPopup, setIsOpenCancelPopup] = useState(false);
+
+	useEffect(() => {
+		if (isLocated) {
+			navigate(URL.HOME);
+		}
+	}, [isLocated]);
 
 	const handleClickAgree = () => {
 		geoLocating();
@@ -22,6 +32,10 @@ function LocationAgree() {
 	const handleClosePopup = () => {
 		setIsOpenCancelPopup(false);
 	};
+
+	if (isLocating) {
+		return <div>FullPageLoading</div>;
+	}
 
 	return (
 		<Container>
