@@ -1,21 +1,19 @@
 import { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
-
-import type { ResultType } from './index.types';
-
-import { Icon } from '~/components/shared';
+import { useLocation } from 'react-router-dom';
 
 function WorldCupResult() {
-	const [isLoading, setIsLoading] = useState<boolean>(true);
-	const [result, setResult] = useState<ResultType | null>(null);
+	const {
+		state: {
+			result: { name, image },
+		},
+	} = useLocation();
 
-	const title = result?.title ?? '';
-	const src = result?.src ?? '';
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		setTimeout(() => {
-			setResult(() => ({ id: 1, title: '만두', src: 'icon-dumplings' }));
 			setIsLoading(false);
 		}, 1000);
 	}, []);
@@ -27,9 +25,9 @@ function WorldCupResult() {
 				<Spinner />
 			) : (
 				<>
-					<Description>당신은 {title} 러버입니다!</Description>
-					<FoodIcon name={src} width={200} />
-					<FoodName>{title}</FoodName>
+					<Description>당신은 {name} 러버입니다!</Description>
+					<FoodIcon src={image} alt={name} width={138} />
+					<FoodName>{name}</FoodName>
 				</>
 			)}
 		</Container>
@@ -60,7 +58,7 @@ const Description = styled.span`
 	line-height: 19px;
 `;
 
-const FoodIcon = styled(Icon)`
+const FoodIcon = styled.img`
 	margin-top: 38px;
 `;
 

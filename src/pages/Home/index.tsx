@@ -3,17 +3,30 @@ import { Children, useState } from 'react';
 
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 import { isNotNull } from '~/utils';
 
 import { ROUND } from './index.consts';
 
 function Home() {
+	const navigate = useNavigate();
+
 	const [selectedRound, setSelectedRound] = useState<number | null>(null);
 
 	const handleChangeRound = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 		setSelectedRound(Number(value));
+	};
+
+	const onClickStart = () => {
+		if (selectedRound === undefined) {
+			alert('Please set round');
+
+			return;
+		}
+
+		navigate('/world-cup', { state: { round: selectedRound } });
 	};
 
 	return (
@@ -44,7 +57,7 @@ function Home() {
 				</SelectRoundButtonWrapper>
 			</Contents>
 
-			<StartButton>시작하기</StartButton>
+			<StartButton onClick={onClickStart}>시작하기</StartButton>
 		</Container>
 	);
 }
@@ -76,6 +89,7 @@ const SelectRoundButtonWrapper = styled.div`
 	margin: 47px 26px 0;
 	display: flex;
 	justify-content: space-evenly;
+	overflow: hidden;
 `;
 
 const SelectRoundButton = styled.label<{ isSelected: boolean }>`

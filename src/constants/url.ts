@@ -2,9 +2,10 @@ export const URL = {
 	MAIN: '/',
 	HOME: '/home',
 	START: '/start',
-	LOCATION_INFORMATION_AGREE: '/location_agree',
+	LOCATION_INFORMATION_AGREE: '/location-agree',
 	WORLD_CUP: {
-		RESULT: '/world_cup/result',
+		ROUND: '/world-cup',
+		RESULT: '/world-cup/result',
 	},
 	SPLASH: '/splash',
 	BRIDGE: '/bridge',
