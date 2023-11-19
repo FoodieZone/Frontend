@@ -92,6 +92,7 @@ function FoodieList() {
 			<ListButton onClick={handleClickOpenSheet}>
 				<Icon name="icon-chevron-up" width={24} height={24} />
 			</ListButton>
+
 			{openSheet ? <Sheet items={swiperMock} onClose={handleCloseSheet} /> : <Swiper items={swiperMock} />}
 		</Container>
 	);

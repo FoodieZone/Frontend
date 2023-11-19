@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 
+import FoodieList from '~/components/Map/FoodieList';
 import { Icon } from '~/components/shared';
 
 function Start() {
@@ -22,6 +23,8 @@ function Start() {
 
 				<StartButton>시작하기</StartButton>
 			</Wrapper>
+
+			<FoodieList />
 		</Container>
 	);
 }

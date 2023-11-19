@@ -11,6 +11,7 @@ interface Props {
 }
 function SwiperCard({ item }: Props) {
 	const { image, name, address } = item;
+
 	const handleClickItem = () => {
 		console.log('click');
 	};
