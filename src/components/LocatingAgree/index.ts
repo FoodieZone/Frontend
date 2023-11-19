@@ -1,1 +1,1 @@
-export { default as CancelPopup } from './CancelPopup';
+export * from './CancelPopup';
