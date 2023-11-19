@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from 'react';
 
+import { isNull } from 'lodash';
+
 import useCoords from '~/hooks/useCoords';
 
 declare global {
@@ -19,7 +21,7 @@ function KakaoMapPage() {
 	const [kakaoMap, setKakaoMap] = useState<any>(null);
 
 	useEffect(() => {
-		if (coords === null) {
+		if (isNull(coords)) {
 			return;
 		}
 
@@ -34,11 +36,11 @@ function KakaoMapPage() {
 	}, [coords, mapRef]);
 
 	useEffect(() => {
-		if (kakaoMap === null) {
+		if (isNull(kakaoMap)) {
 			return;
 		}
 
-		if (mapRef.current === null) {
+		if (isNull(mapRef.current)) {
 			return;
 		}
 
