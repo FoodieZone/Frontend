@@ -18,7 +18,7 @@ const WorldCupPage = () => {
 	const [candidates, setCandidates] = useState<CandidatesFromServerType[]>();
 	const [roundCount, setRoundCount] = useState<number>(0);
 	const [currentRound, setCurrentRound] = useState<number>(1);
-	const [selectedIndex, setSelectedIndex] = useState<number | undefined>(undefined);
+	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
 	const leftIndex = useRef<number>(0);
 	const winners = useRef<CandidatesFromServerType[]>([]);
@@ -36,7 +36,7 @@ const WorldCupPage = () => {
 		setSelectedIndex(index);
 
 		await wait(500);
-		setSelectedIndex(undefined);
+		setSelectedIndex(null);
 		setCurrentRound((prev) => ++prev);
 		leftIndex.current = leftIndex.current += 2;
 
