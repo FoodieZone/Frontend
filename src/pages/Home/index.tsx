@@ -1,5 +1,4 @@
-import type { ChangeEvent } from 'react';
-import { Children, useState } from 'react';
+import { ChangeEvent, Children, useState } from 'react';
 
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';

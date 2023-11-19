@@ -3,7 +3,7 @@ import camelcaseKeys from 'camelcase-keys';
 import snakeCase from 'snakecase-keys';
 
 const foodios = axios.create({
-	baseURL: '/',
+	baseURL: process.env.REACT_APP_API_URL,
 	timeout: 15000,
 	withCredentials: true,
 	headers: {

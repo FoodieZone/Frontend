@@ -2,12 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
 import { wait } from '~/utils';
 
-import { candidatesFromServer } from './index.consts';
-
-import type { CandidatesFromServerType } from './index.types';
+import { Candidate, candidateState } from '~/stores/candidate';
 
 const WorldCupPage = () => {
 	const navigate = useNavigate();
@@ -15,22 +14,21 @@ const WorldCupPage = () => {
 		state: { round },
 	} = useLocation();
 
-	const [candidates, setCandidates] = useState<CandidatesFromServerType[]>();
+	const initialCandidates = useRecoilValue(candidateState);
+
+	const [candidates, setCandidates] = useState<Candidate[]>(initialCandidates);
 	const [roundCount, setRoundCount] = useState<number>(0);
 	const [currentRound, setCurrentRound] = useState<number>(1);
 	const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
 	const leftIndex = useRef<number>(0);
-	const winners = useRef<CandidatesFromServerType[]>([]);
+	const winners = useRef<Candidate[]>([]);
 
 	useEffect(() => {
 		setRoundCount(round / 2);
-
-		// 서버 요청
-		setCandidates(candidatesFromServer);
 	}, []);
 
-	const handleClickCandidate = async (el: CandidatesFromServerType, index: number) => {
+	const handleClickCandidate = async (el: Candidate, index: number) => {
 		winners.current.push(el);
 
 		setSelectedIndex(index);
@@ -63,12 +61,12 @@ const WorldCupPage = () => {
 			<Title>Choice Food</Title>
 			<CandidatesWrapper>
 				{candidates?.slice(leftIndex.current, leftIndex.current + 2).map((el, index) => (
-					<Candidate key={`candidate-${el.name}`}>
+					<CandidateWrapper key={`candidate-${el.name}`}>
 						<CandidateImage onClick={() => handleClickCandidate(el, index)} selected={selectedIndex === index}>
 							<img src={el.image} alt={el.name} width={138} />
 						</CandidateImage>
 						<CandidateName>{el.name}</CandidateName>
-					</Candidate>
+					</CandidateWrapper>
 				))}
 			</CandidatesWrapper>
 		</Container>
@@ -115,7 +113,7 @@ const CandidatesWrapper = styled.div`
 	margin-top: 100px;
 `;
 
-const Candidate = styled.div`
+const CandidateWrapper = styled.div`
 	font-size: 22px;
 	color: #a4a4a4;
 `;

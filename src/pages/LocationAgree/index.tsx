@@ -2,22 +2,33 @@ import { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
 import { URL } from '~/constants';
 import { useGeoLocation } from '~/hooks';
 
+import { MOCK_RESTAURANTS } from '../Home/index.consts';
+
 import { CancelPopup } from '~/components/LocatingAgree';
 import { Icon } from '~/components/shared';
+import { candidateState } from '~/stores/candidate';
 
 function LocationAgree() {
 	const navigate = useNavigate();
-	const { geoLocating, isLocating, isLocated } = useGeoLocation({ pending: true });
+	const { geoLocating, isLocating, isLocated, location } = useGeoLocation({ pending: true });
+
+	const setCategories = useSetRecoilState(candidateState);
 
 	const [isOpenCancelPopup, setIsOpenCancelPopup] = useState(false);
 
 	useEffect(() => {
 		if (isLocated) {
-			navigate(URL.HOME);
+			// const data = await foodios.get(`/restaurants/rounds/?lng=${location.longitude}&lat=${location.latitude}`);
+			console.log(location);
+
+			setCategories(MOCK_RESTAURANTS.foods);
+
+			MOCK_RESTAURANTS.round === 16 ? navigate(URL.HOME) : navigate(URL.WORLD_CUP.ROUND);
 		}
 	}, [isLocated]);
 
