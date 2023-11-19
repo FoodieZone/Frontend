@@ -23,7 +23,7 @@ function SwiperCard({ item }: Props) {
 				<Title>{name}</Title>
 
 				<Address>
-					<Icon name="icon-location" width={16} height={16} />
+					<Icon name="icon-map-pin" width={16} height={16} />
 					<AddressText>{address}</AddressText>
 				</Address>
 			</ContentsWrapper>

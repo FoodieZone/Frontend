@@ -45,10 +45,83 @@ export const swiperMock: Restaurant[] = [
 		distance: 996.0,
 		kakaoMapsId: '772414643',
 	},
+	{
+		lng: 127.03241956181776,
+		lat: 37.49775543833608,
+		address: '서울 강남구 역삼동 823-16',
+		name: '데일리픽스',
+		foodName: '햄버거',
+		distance: 444.0,
+		kakaoMapsId: '717158192',
+	},
+	{
+		lng: 127.029332806632,
+		lat: 37.4932485081661,
+		address: '서울 서초구 서초동 1329-8',
+		name: '파파이스 강남점',
+		foodName: '햄버거',
+		distance: 996.0,
+		kakaoMapsId: '772414643',
+	},
+	{
+		lng: 127.03241956181776,
+		lat: 37.49775543833608,
+		address: '서울 강남구 역삼동 823-16',
+		name: '데일리픽스',
+		foodName: '햄버거',
+		distance: 444.0,
+		kakaoMapsId: '717158192',
+	},
+	{
+		lng: 127.029332806632,
+		lat: 37.4932485081661,
+		address: '서울 서초구 서초동 1329-8',
+		name: '파파이스 강남점',
+		foodName: '햄버거',
+		distance: 996.0,
+		kakaoMapsId: '772414643',
+	},
+	{
+		lng: 127.03241956181776,
+		lat: 37.49775543833608,
+		address: '서울 강남구 역삼동 823-16',
+		name: '데일리픽스',
+		foodName: '햄버거',
+		distance: 444.0,
+		kakaoMapsId: '717158192',
+	},
+	{
+		lng: 127.029332806632,
+		lat: 37.4932485081661,
+		address: '서울 서초구 서초동 1329-8',
+		name: '파파이스 강남점',
+		foodName: '햄버거',
+		distance: 996.0,
+		kakaoMapsId: '772414643',
+	},
+	{
+		lng: 127.03241956181776,
+		lat: 37.49775543833608,
+		address: '서울 강남구 역삼동 823-16',
+		name: '데일리픽스',
+		foodName: '햄버거',
+		distance: 444.0,
+		kakaoMapsId: '717158192',
+	},
+	{
+		lng: 127.029332806632,
+		lat: 37.4932485081661,
+		address: '서울 서초구 서초동 1329-8',
+		name: '파파이스 강남점',
+		foodName: '햄버거',
+		distance: 996.0,
+		kakaoMapsId: '772414643',
+	},
 ];
 
 function FoodieList() {
 	const [openSheet, setOpenSheet] = useState(false);
+	const [selectedRestaurant] = useState(swiperMock[0]);
 
 	const handleClickOpenSheet = () => {
 		setOpenSheet(true);
@@ -60,11 +133,22 @@ function FoodieList() {
 
 	return (
 		<Container>
+			<Header>
+				<Title>{selectedRestaurant.address}</Title>
+
+				<CurrentLocationButton>
+					<Icon name="icon-maps-my-location" />
+				</CurrentLocationButton>
+			</Header>
+
 			<ListButton onClick={handleClickOpenSheet}>
 				<Icon name="icon-chevron-up" width={24} height={24} />
 			</ListButton>
 
-			{openSheet ? <Sheet items={swiperMock} onClose={handleCloseSheet} /> : <Swiper items={swiperMock} />}
+			{openSheet && <Sheet items={swiperMock} onClose={handleCloseSheet} />}
+			<Swiper items={swiperMock} />
+
+			<RestartButton>홈으로가기</RestartButton>
 		</Container>
 	);
 }
@@ -86,6 +170,41 @@ const Container = styled.div`
 	}
 `;
 
+const Header = styled.div`
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+`;
+
+const Title = styled.div`
+	width: 100%;
+	background-color: white;
+	border-radius: 0 0 20px 20px;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 140%;
+	letter-spacing: 0.2px;
+	color: black;
+	text-align: center;
+	padding: 20px 0;
+`;
+
+const CurrentLocationButton = styled.div`
+	position: absolute;
+	right: 11px;
+	bottom: -49px;
+	width: 40px;
+	height: 40px;
+	border-radius: 99px;
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	fill: #fff;
+	filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.07));
+`;
+
 const ListButton = styled.div`
 	width: 37px;
 	height: 37px;
@@ -96,4 +215,19 @@ const ListButton = styled.div`
 	margin-bottom: 15px;
 	background-color: white;
 	border-radius: 99px;
+`;
+
+const RestartButton = styled.div`
+	position: relative;
+	background-color: ${({ theme }) => theme.colors.red[1]};
+	border-radius: 16px;
+	padding: 14px 16px;
+	text-align: center;
+	color: white;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 140%;
+	letter-spacing: -0.408px;
+	margin: 23px 27px 32px 27px;
+	z-index: 2;
 `;

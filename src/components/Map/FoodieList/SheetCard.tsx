@@ -24,7 +24,7 @@ function SheetCard({ item }: Props) {
 			<Contents>
 				<Title>{name}</Title>
 				<Address>
-					<Icon name="icon-location" width={13} height={12} />
+					<Icon name="icon-map-pin" width={13} height={12} />
 					<AddressTitle>{address}</AddressTitle>
 				</Address>
 				<Info>{`${foodName} ${transDistance}`}</Info>

@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from 'react';
 
+import styled from '@emotion/styled';
 import { isNull } from 'lodash';
 
 import { FullPageLoading } from '~/components';
 import { useGeoLocation } from '~/hooks';
 
-import { KakaoMap } from '~/components/Map';
+import { FoodieList, KakaoMap } from '~/components/Map';
 
 declare global {
 	interface Window {
@@ -64,7 +65,18 @@ function MapPage() {
 		);
 	}
 
-	return <KakaoMap kakaoMap={kakaoMap} ref={mapRef} />;
+	return (
+		<Container>
+			<KakaoMap kakaoMap={kakaoMap} ref={mapRef} />
+
+			<FoodieList />
+		</Container>
+	);
 }
 
 export default MapPage;
+
+const Container = styled.div`
+	width: 100%;
+	height: 100%;
+`;

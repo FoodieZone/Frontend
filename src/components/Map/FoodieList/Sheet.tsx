@@ -20,7 +20,10 @@ function Sheet({ items, onClose }: Props) {
 		<Container>
 			<Contents>
 				<Title>푸디존이 추천하는 맛집 List</Title>
-				<List>{Children.toArray(items.map((item) => <SheetCard item={item} />))}</List>
+				<List>
+					{Children.toArray(items.map((item) => <SheetCard item={item} />))}
+					<Gradient />
+				</List>
 			</Contents>
 
 			<Dim onClick={handleClickDim} />
@@ -70,7 +73,16 @@ const Title = styled.div`
 `;
 
 const List = styled.div`
-	height: calc(100% - 50px);
-	padding-bottom: 30px;
+	height: calc(100% - 120px);
+	padding-bottom: 120px;
 	overflow: auto;
+`;
+
+const Gradient = styled.span`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 120px;
+	background: linear-gradient(#ffffff00, #ffffff);
 `;
