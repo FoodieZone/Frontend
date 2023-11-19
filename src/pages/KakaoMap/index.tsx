@@ -3,8 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import { isNull } from 'lodash';
 
+import { useGeoLocation } from '~/hooks';
+
 import FullPageLoading from '~/components/shared/FullPageLoading';
-import useCoords from '~/hooks/useCoords';
 
 declare global {
 	interface Window {
@@ -17,24 +18,23 @@ const { kakao } = window;
 function KakaoMapPage() {
 	const mapRef = useRef<HTMLDivElement>(null);
 
-	const coords = useCoords();
-
 	const [kakaoMap, setKakaoMap] = useState<any>(null);
+	const { latitude, longitude, isLocating } = useGeoLocation({ pending: false });
 
 	useEffect(() => {
-		if (isNull(coords)) {
+		if (isLocating) {
 			return;
 		}
 
 		const options = {
-			center: new kakao.maps.LatLng(coords.latitude, coords.longitude),
+			center: new kakao.maps.LatLng(latitude, longitude),
 			level: 4,
 		};
 
 		const map = new kakao.maps.Map(mapRef.current, options);
 
 		setKakaoMap(map);
-	}, [coords, mapRef]);
+	}, [isLocating, latitude, longitude, mapRef]);
 
 	useEffect(() => {
 		if (isNull(kakaoMap)) {
@@ -54,7 +54,7 @@ function KakaoMapPage() {
 		kakaoMap.setCenter(center);
 	}, [kakaoMap]);
 
-	if (isNull(coords)) {
+	if (isLocating) {
 		return (
 			<FullPageLoading>
 				푸디존에서 맞춤형 맛집을
