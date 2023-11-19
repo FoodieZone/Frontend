@@ -49,9 +49,10 @@ export const swiperMock: Restaurant[] = [
 
 interface FoodieListProps {
 	handleChangeFocusedItemIndex: (index: number) => void;
+	handleClickCurrentLocationButton: VoidFunction;
 }
 
-function FoodieList({ handleChangeFocusedItemIndex }: FoodieListProps) {
+function FoodieList({ handleChangeFocusedItemIndex, handleClickCurrentLocationButton }: FoodieListProps) {
 	const [openSheet, setOpenSheet] = useState(false);
 	const [selectedRestaurant] = useState(swiperMock[0]);
 
@@ -72,7 +73,7 @@ function FoodieList({ handleChangeFocusedItemIndex }: FoodieListProps) {
 			<Header>
 				<Title>{selectedRestaurant.address}</Title>
 
-				<CurrentLocationButton>
+				<CurrentLocationButton onClick={handleClickCurrentLocationButton}>
 					<Icon name="icon-maps-my-location" />
 				</CurrentLocationButton>
 			</Header>
