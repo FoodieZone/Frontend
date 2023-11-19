@@ -8,7 +8,6 @@ export const URL = {
 		RESULT: '/world-cup/result',
 	},
 	SPLASH: '/splash',
-	BRIDGE: '/bridge',
 	RECOMMEND: '/recommend',
 	KAKAO_MAP: '/kakao-map',
 };

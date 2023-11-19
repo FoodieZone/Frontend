@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { isNull } from 'lodash';
 
+import FullPageLoading from '~/components/shared/FullPageLoading';
 import useCoords from '~/hooks/useCoords';
 
 declare global {
@@ -53,7 +54,17 @@ function KakaoMapPage() {
 		kakaoMap.setCenter(center);
 	}, [kakaoMap]);
 
-	return <>{coords === null ? <div>loading...</div> : <div ref={mapRef} />}</>;
+	if (isNull(coords)) {
+		return (
+			<FullPageLoading>
+				푸디존에서 맞춤형 맛집을
+				<br />
+				찾고있습니다! 조금만 기다려주세요🙏🏻
+			</FullPageLoading>
+		);
+	}
+
+	return <div ref={mapRef} />;
 }
 
 export default KakaoMapPage;
