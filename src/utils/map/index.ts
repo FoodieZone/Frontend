@@ -1,11 +1,11 @@
-interface MakeCustomOverlayParams {
-	image: string;
-	name: string;
-}
+import type { Restaurant } from '~/interfaces';
 
-export const makeCustomOverlay = ({ image, name }: MakeCustomOverlayParams) => {
-	console.log(image, name);
+export const makeCustomOverlay = ({ image, name }: Pick<Restaurant, 'image' | 'name'>) => {
+	console.log(image);
+
 	return `
-    <div></div>
+    <div>
+      ${name}
+    </div>
   `;
 };
