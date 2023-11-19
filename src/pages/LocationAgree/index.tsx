@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import { URL } from '~/constants';
 import { useGeoLocation } from '~/hooks';
 
-import { MOCK_RESTAURANTS } from '../Home/index.consts';
+import { MOCK_CATEGORIES } from './index.consts';
 
 import { CancelPopup } from '~/components/LocatingAgree';
 import { FullPageLoading, Icon } from '~/components/shared';
@@ -26,9 +26,9 @@ function LocationAgree() {
 			// const data = await foodios.get(`/restaurants/rounds/?lng=${location.longitude}&lat=${location.latitude}`);
 			console.log(location);
 
-			setCategories(MOCK_RESTAURANTS.foods);
+			setCategories(MOCK_CATEGORIES.foods);
 
-			if (MOCK_RESTAURANTS.round === 16) {
+			if (MOCK_CATEGORIES.round === 16) {
 				navigate(URL.HOME);
 			} else {
 				navigate(URL.WORLD_CUP.ROUND);

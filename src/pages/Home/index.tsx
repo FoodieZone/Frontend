@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
+import { URL } from '~/constants';
 import { isNotNull } from '~/utils';
 
 import { ROUND } from './index.consts';
@@ -25,7 +26,7 @@ function Home() {
 			return;
 		}
 
-		navigate('/world-cup', { state: { round: selectedRound } });
+		navigate(URL.WORLD_CUP.ROUND, { state: { round: selectedRound } });
 	};
 
 	return (

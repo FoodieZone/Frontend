@@ -1,8 +1,33 @@
+import { useEffect, useState } from 'react';
+
 import styled from '@emotion/styled';
+import { useLocation } from 'react-router-dom';
 
 import { Icon } from '~/components';
+import { Restaurant } from '~/interfaces';
+
+import { MOCK_RESTAURANTS } from './index.conts';
 
 function Recommend() {
+	const {
+		state: {
+			result: { name },
+		},
+	} = useLocation();
+	// const { latitude, longitude } = useRecoilValue(locationState);
+
+	const [recommended, setRecommended] = useState<Restaurant>();
+
+	useEffect(() => {
+		const getResult = async () => {
+			// const data = await foodios.get(`/restaurants/results/?lng=${longitude}&lat=${latitude}&name=${name}`);
+
+			setRecommended(MOCK_RESTAURANTS[0]);
+		};
+
+		getResult();
+	});
+
 	return (
 		<Container>
 			<Contents>
@@ -10,11 +35,11 @@ function Recommend() {
 
 				<FoodInfoWrapper>
 					<FoodImage name="image-burger" height={327} />
-					<FoodName>버거운 버거</FoodName>
+					<FoodName>{recommended?.foodName}</FoodName>
 					<FoodLocationWrapper>
 						<Icon name="icon-map-pin" width={18} height={18} />
-						<StoreName>버거운 버거</StoreName>
-						<StoreAddress>서울특별시 특별구 특별로 123길 45</StoreAddress>
+						<StoreName>{recommended?.name}</StoreName>
+						<StoreAddress>{recommended?.address}</StoreAddress>
 					</FoodLocationWrapper>
 				</FoodInfoWrapper>
 			</Contents>

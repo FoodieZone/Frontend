@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import styled from '@emotion/styled';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { URL } from '~/constants';
 
 function WorldCupResult() {
 	const {
@@ -9,27 +11,23 @@ function WorldCupResult() {
 			result: { name, image },
 		},
 	} = useLocation();
-
-	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		setTimeout(() => {
-			setIsLoading(false);
+			navigate(URL.RECOMMEND, { state: { result: name } });
 		}, 1000);
 	}, []);
 
 	return (
 		<Container>
 			<Title>Final food</Title>
-			{isLoading ? (
-				<Spinner />
-			) : (
-				<>
-					<Description>당신은 {name} 러버입니다!</Description>
-					<FoodIcon src={image} alt={name} width={138} />
-					<FoodName>{name}</FoodName>
-				</>
-			)}
+
+			<>
+				<Description>당신은 {name} 러버입니다!</Description>
+				<FoodIcon src={image} alt={name} width={138} />
+				<FoodName>{name}</FoodName>
+			</>
 		</Container>
 	);
 }
