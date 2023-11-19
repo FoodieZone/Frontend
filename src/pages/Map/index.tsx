@@ -34,7 +34,7 @@ function MapPage() {
 		const map = new kakao.maps.Map(mapRef.current, options);
 
 		setKakaoMap(map);
-	}, [isLocating, latitude, longitude, mapRef, setKakaoMap]);
+	}, [isLocating, latitude, longitude, mapRef]);
 
 	useEffect(() => {
 		if (isNull(kakaoMap)) {
@@ -53,6 +53,17 @@ function MapPage() {
 		kakaoMap.relayout();
 		kakaoMap.setCenter(center);
 	}, [kakaoMap, mapRef]);
+
+	useEffect(() => {
+		if (isNull(kakaoMap)) {
+			return;
+		}
+
+		const currentPositionMarker = new window.kakao.maps.Marker({
+			position: new window.kakao.maps.LatLng(latitude, longitude),
+		});
+		currentPositionMarker.setMap(kakaoMap);
+	}, [kakaoMap, latitude, longitude]);
 
 	if (isLocating) {
 		return (
