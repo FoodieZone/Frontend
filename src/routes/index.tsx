@@ -4,7 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import App from '~/App';
 import { URL } from '~/constants';
-import { Home, LocationAgree, Start, WorldCupPage, WorldCupResult, Splash, Bridge, Recommend } from '~/pages';
+import { Home, LocationAgree, Start, WorldCupPage, WorldCupResult, Splash, Recommend } from '~/pages';
 
 import KakaoMapPage from '~/pages/KakaoMap';
 
@@ -45,11 +45,6 @@ const routeData: RouterBase[] = [
 		id: 'WorldCupResult',
 		path: URL.WORLD_CUP.RESULT,
 		element: <WorldCupResult />,
-	},
-	{
-		id: 'Bridge',
-		path: URL.BRIDGE,
-		element: <Bridge />,
 	},
 	{
 		id: 'Splash',
