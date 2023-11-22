@@ -2,10 +2,10 @@
 import type { ForwardedRef } from 'react';
 import { forwardRef, useEffect, useState } from 'react';
 
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 
 import { useGeoLocation } from '~/hooks';
-import { makeCustomOverlay } from '~/utils';
+import { isNotNull, makeCustomOverlay } from '~/utils';
 
 import FoodieList, { swiperMock } from '../FoodieList';
 
@@ -14,11 +14,32 @@ interface KakaoMapProps {
 }
 
 const KakaoMap = forwardRef(({ kakaoMap }: KakaoMapProps, ref: ForwardedRef<HTMLDivElement>) => {
-	const { latitude, longitude, isLocating } = useGeoLocation({ pending: false });
+	const { latitude, longitude, isLocating, isLocated } = useGeoLocation({ pending: false });
 
 	const [focusedItemIndex, setFocusedItemIndex] = useState<number>(0);
 	const [customOverlayList, setCustomOverlayList] = useState<any[]>([]);
+	const [currentLocationMarkerState, setCurrentLocationMarkerState] = useState<any>(null);
 
+	const settingCurrentLocation = () => {
+		const currentLocationMarker = new window.kakao.maps.Marker({
+			position: new window.kakao.maps.LatLng(latitude, longitude),
+		});
+
+		setCurrentLocationMarkerState(currentLocationMarker);
+		currentLocationMarker.setMap(kakaoMap);
+	};
+
+	// init current location marker
+	useEffect(() => {
+		if (!isLocated) {
+			return;
+		}
+
+		settingCurrentLocation();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isLocated]);
+
+	// init foodielist marker
 	useEffect(() => {
 		setCustomOverlayList(
 			swiperMock.map(
@@ -35,6 +56,7 @@ const KakaoMap = forwardRef(({ kakaoMap }: KakaoMapProps, ref: ForwardedRef<HTML
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [focusedItemIndex]);
 
+	// setting foodieList marker
 	useEffect(() => {
 		if (isEmpty(customOverlayList)) {
 			return;
@@ -53,6 +75,12 @@ const KakaoMap = forwardRef(({ kakaoMap }: KakaoMapProps, ref: ForwardedRef<HTML
 		if (isLocating) {
 			return;
 		}
+
+		if (isNotNull(currentLocationMarkerState)) {
+			currentLocationMarkerState.setMap(null);
+		}
+
+		settingCurrentLocation();
 
 		const moveLatLng = new window.kakao.maps.LatLng(latitude, longitude);
 		kakaoMap.panTo(moveLatLng);

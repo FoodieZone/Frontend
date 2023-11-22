@@ -57,17 +57,6 @@ function MapPage() {
 		kakaoMap.setCenter(center);
 	}, [kakaoMap, mapRef]);
 
-	useEffect(() => {
-		if (isNull(kakaoMap)) {
-			return;
-		}
-
-		const currentPositionMarker = new window.kakao.maps.Marker({
-			position: new window.kakao.maps.LatLng(latitude, longitude),
-		});
-		currentPositionMarker.setMap(kakaoMap);
-	}, [kakaoMap, latitude, longitude]);
-
 	if (isLocating) {
 		return (
 			<FullPageLoading>
