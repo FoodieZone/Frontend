@@ -7,7 +7,7 @@ import { isNull } from 'lodash';
 import { FullPageLoading } from '~/components';
 import { useGeoLocation } from '~/hooks';
 
-import { FoodieList, KakaoMap } from '~/components/Map';
+import { KakaoMap } from '~/components/Map';
 
 declare global {
 	interface Window {
@@ -19,8 +19,10 @@ const { kakao } = window;
 
 function MapPage() {
 	const mapRef = useRef<HTMLDivElement>(null);
-	const [kakaoMap, setKakaoMap] = useState<any>(null);
+
 	const { latitude, longitude, isLocating } = useGeoLocation({ pending: false });
+
+	const [kakaoMap, setKakaoMap] = useState<any>(null);
 
 	useEffect(() => {
 		if (isLocating) {
@@ -55,17 +57,6 @@ function MapPage() {
 		kakaoMap.setCenter(center);
 	}, [kakaoMap, mapRef]);
 
-	useEffect(() => {
-		if (isNull(kakaoMap)) {
-			return;
-		}
-
-		const currentPositionMarker = new window.kakao.maps.Marker({
-			position: new window.kakao.maps.LatLng(latitude, longitude),
-		});
-		currentPositionMarker.setMap(kakaoMap);
-	}, [kakaoMap, latitude, longitude]);
-
 	if (isLocating) {
 		return (
 			<FullPageLoading>
@@ -79,8 +70,6 @@ function MapPage() {
 	return (
 		<Container>
 			<KakaoMap kakaoMap={kakaoMap} ref={mapRef} />
-
-			<FoodieList />
 		</Container>
 	);
 }
