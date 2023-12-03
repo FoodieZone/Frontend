@@ -28,14 +28,14 @@ function LocationAgree() {
 	const [isOpenCancelPopup, setIsOpenCancelPopup] = useState(false);
 
 	useEffect(() => {
-		if (isSuccess) {
-			setCategories(foods);
+		if (!isSuccess) return;
 
-			if (foods.length === 16) {
-				navigate(URL.HOME);
-			} else {
-				navigate(URL.WORLD_CUP.ROUND);
-			}
+		setCategories(foods);
+
+		if (foods.length === 16) {
+			navigate(URL.HOME);
+		} else {
+			navigate(URL.WORLD_CUP.ROUND);
 		}
 	}, [isSuccess]);
 

@@ -1,37 +1,41 @@
 import { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
+import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
 import { Icon } from '~/components';
-import { Restaurant } from '~/interfaces';
+import type { Restaurant } from '~/interfaces';
 
-import { MOCK_RESTAURANTS } from './index.conts';
+import { fetchRestaurant, RestaurantsKey } from '~/queries/restaurant';
+import { locationState } from '~/stores/location';
 
 function Recommend() {
 	const {
-		state: {
-			result: { name },
-		},
+		state: { name },
 	} = useLocation();
-	// const { latitude, longitude } = useRecoilValue(locationState);
+
+	const { latitude, longitude } = useRecoilValue(locationState);
+
+	const { data: restaurants, isSuccess } = useQuery({
+		queryKey: RestaurantsKey.location(),
+		queryFn: () => fetchRestaurant(longitude, latitude, name),
+		enabled: !!name,
+	});
 
 	const [recommended, setRecommended] = useState<Restaurant>();
 
 	useEffect(() => {
-		const getResult = async () => {
-			// const data = await foodios.get(`/restaurants/results/?lng=${longitude}&lat=${latitude}&name=${name}`);
+		if (!isSuccess) return;
 
-			setRecommended(MOCK_RESTAURANTS[0]);
-		};
-
-		getResult();
-	});
+		setRecommended(restaurants[0]);
+	}, [isSuccess]);
 
 	return (
 		<Container>
 			<Contents>
-				<Title>근처 햄버거 인기맛집을 추천드려요 !</Title>
+				<Title>근처 {recommended?.foodName} 인기맛집을 추천드려요 !</Title>
 
 				<FoodInfoWrapper>
 					<FoodImage name="image-burger" height={327} />

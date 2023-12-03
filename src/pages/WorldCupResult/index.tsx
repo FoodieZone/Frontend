@@ -15,7 +15,7 @@ function WorldCupResult() {
 
 	useEffect(() => {
 		setTimeout(() => {
-			navigate(URL.RECOMMEND, { state: { result: name } });
+			navigate(URL.RECOMMEND, { state: { name } });
 		}, 1000);
 	}, []);
 
