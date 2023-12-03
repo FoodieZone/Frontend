@@ -4,7 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import App from '~/App';
 import { URL } from '~/constants';
-import { Home, LocationAgree, Start, WorldCupPage, WorldCupResult, Splash, Recommend } from '~/pages';
+import { Home, LocationAgree, Recommend, Splash, Start, WorldCupPage, WorldCupResult } from '~/pages';
 
 import MapPage from '~/pages/Map';
 
@@ -25,7 +25,6 @@ const routeData: RouterBase[] = [
 		path: URL.LOCATION_INFORMATION_AGREE,
 		element: <LocationAgree />,
 	},
-
 	{
 		id: 'Home',
 		path: URL.HOME,

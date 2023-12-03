@@ -1,40 +1,43 @@
 import { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
 import { URL } from '~/constants';
 import { useGeoLocation } from '~/hooks';
 
-import { MOCK_CATEGORIES } from './index.consts';
-
 import { CancelPopup } from '~/components/LocatingAgree';
 import { FullPageLoading, Icon } from '~/components/shared';
+import { fetchRounds, RoundsKey } from '~/queries/rounds';
 import { candidateState } from '~/stores/candidate';
 
 function LocationAgree() {
-	const navigate = useNavigate();
 	const { geoLocating, isLocating, isLocated, location } = useGeoLocation({ pending: true });
+	const navigate = useNavigate();
+
+	const { data: foods, isSuccess } = useQuery({
+		queryKey: RoundsKey.location(),
+		queryFn: () => fetchRounds(location.longitude, location.latitude),
+		enabled: isLocated,
+	});
 
 	const setCategories = useSetRecoilState(candidateState);
 
 	const [isOpenCancelPopup, setIsOpenCancelPopup] = useState(false);
 
 	useEffect(() => {
-		if (isLocated) {
-			// const data = await foodios.get(`/restaurants/rounds/?lng=${location.longitude}&lat=${location.latitude}`);
-			console.log(location);
+		if (isSuccess) {
+			setCategories(foods);
 
-			setCategories(MOCK_CATEGORIES.foods);
-
-			if (MOCK_CATEGORIES.round === 16) {
+			if (foods.length === 16) {
 				navigate(URL.HOME);
 			} else {
 				navigate(URL.WORLD_CUP.ROUND);
 			}
 		}
-	}, [isLocated]);
+	}, [isSuccess]);
 
 	const handleClickAgree = () => {
 		geoLocating();
