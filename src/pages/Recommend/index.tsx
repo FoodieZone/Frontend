@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
-import { Icon } from '~/components';
+import { FullPageLoading, Icon } from '~/components';
 
 import { fetchRestaurant, RestaurantsKey } from '~/queries/restaurant';
 import { locationState } from '~/stores/location';
@@ -19,10 +19,17 @@ function Recommend() {
 	const { data: restaurants, isSuccess } = useQuery({
 		queryKey: RestaurantsKey.location(),
 		queryFn: () => fetchRestaurant(longitude, latitude, encodeURIComponent(name)),
-		enabled: !!name,
+		enabled: !!(name && longitude && latitude),
 	});
 
-	if (!isSuccess || _.isEmpty(restaurants)) return <></>;
+	if (!isSuccess || _.isEmpty(restaurants))
+		return (
+			<FullPageLoading>
+				푸디존에서 맞춤형 맛집을
+				<br />
+				찾고있습니다! 조금만 기다려주세요🙏🏻
+			</FullPageLoading>
+		);
 
 	return (
 		<Container>
