@@ -60,12 +60,15 @@ const WorldCupPage = () => {
 			</RoundMatchInfo>
 			<Title>Choice Food</Title>
 			<CandidatesWrapper>
-				{candidates?.slice(leftIndex.current, leftIndex.current + 2).map((el, index) => (
-					<CandidateWrapper key={`candidate-${el.name}`}>
-						<CandidateImage onClick={() => handleClickCandidate(el, index)} selected={selectedIndex === index}>
-							<img src={el.image} alt={el.name} width={138} />
+				{candidates?.slice(leftIndex.current, leftIndex.current + 2).map((slicedCandidate, index) => (
+					<CandidateWrapper key={`candidate-${slicedCandidate.name}`}>
+						<CandidateImage
+							onClick={() => handleClickCandidate(slicedCandidate, index)}
+							selected={selectedIndex === index}
+						>
+							<img src={slicedCandidate.image} alt={slicedCandidate.name} width={138} />
 						</CandidateImage>
-						<CandidateName>{el.name}</CandidateName>
+						<CandidateName>{slicedCandidate.name}</CandidateName>
 					</CandidateWrapper>
 				))}
 			</CandidatesWrapper>

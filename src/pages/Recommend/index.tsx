@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
-
 import styled from '@emotion/styled';
+import _ from 'lodash';
 import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { Icon } from '~/components';
-import type { Restaurant } from '~/interfaces';
 
 import { fetchRestaurant, RestaurantsKey } from '~/queries/restaurant';
 import { locationState } from '~/stores/location';
@@ -20,30 +18,24 @@ function Recommend() {
 
 	const { data: restaurants, isSuccess } = useQuery({
 		queryKey: RestaurantsKey.location(),
-		queryFn: () => fetchRestaurant(longitude, latitude, name),
+		queryFn: () => fetchRestaurant(longitude, latitude, encodeURIComponent(name)),
 		enabled: !!name,
 	});
 
-	const [recommended, setRecommended] = useState<Restaurant>();
-
-	useEffect(() => {
-		if (!isSuccess) return;
-
-		setRecommended(restaurants[0]);
-	}, [isSuccess]);
+	if (!isSuccess || _.isEmpty(restaurants)) return <></>;
 
 	return (
 		<Container>
 			<Contents>
-				<Title>근처 {recommended?.foodName} 인기맛집을 추천드려요 !</Title>
+				<Title>근처 {restaurants[0].foodName} 인기맛집을 추천드려요 !</Title>
 
 				<FoodInfoWrapper>
 					<FoodImage name="image-burger" height={327} />
-					<FoodName>{recommended?.foodName}</FoodName>
+					<FoodName>{restaurants[0].foodName}</FoodName>
 					<FoodLocationWrapper>
 						<Icon name="icon-map-pin" width={18} height={18} />
-						<StoreName>{recommended?.name}</StoreName>
-						<StoreAddress>{recommended?.address}</StoreAddress>
+						<StoreName>{restaurants[0].name}</StoreName>
+						<StoreAddress>{restaurants[0].address}</StoreAddress>
 					</FoodLocationWrapper>
 				</FoodInfoWrapper>
 			</Contents>

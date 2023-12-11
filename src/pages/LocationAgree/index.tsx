@@ -34,9 +34,11 @@ function LocationAgree() {
 
 		if (foods.length === 16) {
 			navigate(URL.HOME);
-		} else {
-			navigate(URL.WORLD_CUP.ROUND);
+
+			return;
 		}
+
+		navigate(URL.WORLD_CUP.ROUND);
 	}, [isSuccess]);
 
 	const handleClickAgree = () => {

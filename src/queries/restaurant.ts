@@ -10,9 +10,9 @@ export const fetchRestaurant = async (
 	latitude: null | number,
 	name: string
 ): Promise<Restaurant[]> => {
-	const { data: restaurants } = await foodios.get(
-		`/restaurants/results/?lng=${longitude}&lat=${latitude}&name=${name}`
-	);
+	const {
+		data: { restaurants },
+	} = await foodios.get(`/restaurants/results/?lng=${longitude}&lat=${latitude}&name=${name}`);
 
 	return restaurants;
 };
