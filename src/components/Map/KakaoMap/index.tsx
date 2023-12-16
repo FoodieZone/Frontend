@@ -3,20 +3,23 @@ import type { ForwardedRef } from 'react';
 import { forwardRef, useEffect, useState } from 'react';
 
 import { isEmpty } from 'lodash-es';
+import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 
 import { useGeoLocation } from '~/hooks';
 import { isNotNull, makeCustomOverlay } from '~/utils';
 
-import FoodieList, { swiperMock } from '../FoodieList';
+import FoodieList from '../FoodieList';
 
+import { fetchRestaurant, RestaurantsKey } from '~/queries/restaurant';
 import { locationState } from '~/stores/location';
 
 interface KakaoMapProps {
 	kakaoMap: any;
+	name: string;
 }
 
-const KakaoMap = forwardRef(({ kakaoMap }: KakaoMapProps, ref: ForwardedRef<HTMLDivElement>) => {
+const KakaoMap = forwardRef(({ kakaoMap, name }: KakaoMapProps, ref: ForwardedRef<HTMLDivElement>) => {
 	const { isLocating, isLocated } = useGeoLocation({ pending: false });
 
 	const { latitude, longitude } = useRecoilValue(locationState);
@@ -24,6 +27,12 @@ const KakaoMap = forwardRef(({ kakaoMap }: KakaoMapProps, ref: ForwardedRef<HTML
 	const [focusedItemIndex, setFocusedItemIndex] = useState<number>(0);
 	const [customOverlayList, setCustomOverlayList] = useState<any[]>([]);
 	const [currentLocationMarkerState, setCurrentLocationMarkerState] = useState<any>(null);
+
+	const { data: restaurants, isSuccess } = useQuery({
+		queryKey: RestaurantsKey.location(),
+		queryFn: () => fetchRestaurant(longitude, latitude, encodeURIComponent(name)),
+		enabled: !!(name && longitude && latitude),
+	});
 
 	const settingCurrentLocation = () => {
 		const currentLocationMarker = new window.kakao.maps.Marker({
@@ -46,20 +55,22 @@ const KakaoMap = forwardRef(({ kakaoMap }: KakaoMapProps, ref: ForwardedRef<HTML
 
 	// init foodielist marker
 	useEffect(() => {
+		if (!isSuccess) return;
+
 		setCustomOverlayList(
-			swiperMock.map(
-				(mock, index) =>
+			restaurants.map(
+				(restaurant, index) =>
 					new window.kakao.maps.CustomOverlay({
 						kakaoMap,
 						clickable: true,
-						position: new window.kakao.maps.LatLng(mock.lat, mock.lng),
-						content: makeCustomOverlay(mock, index === focusedItemIndex),
+						position: new window.kakao.maps.LatLng(restaurant.lat, restaurant.lng),
+						content: makeCustomOverlay(restaurant, index === focusedItemIndex),
 					})
 			)
 		);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [focusedItemIndex]);
+	}, [focusedItemIndex, isSuccess]);
 
 	// setting foodieList marker
 	useEffect(() => {
