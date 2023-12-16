@@ -1,12 +1,16 @@
 import styled from '@emotion/styled';
 
-import { Popup } from '~/components';
+import { Popup } from '~/components/shared';
 
 interface Props {
 	onClose: () => void;
 }
 
 function CancelPopup(props: Props) {
+	const handleAgree = () => {
+		props.onClose();
+	};
+
 	return (
 		<Popup {...props} closeOnDim>
 			<Container>
@@ -25,7 +29,7 @@ function CancelPopup(props: Props) {
 				</Texts>
 
 				<Buttons>
-					<AgreeButton>동의하러가기</AgreeButton>
+					<AgreeButton onClick={handleAgree}>동의하러가기</AgreeButton>
 					<CancelButton>동의 안하고 추천받기</CancelButton>
 				</Buttons>
 			</Container>

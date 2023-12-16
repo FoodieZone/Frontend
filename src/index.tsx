@@ -3,19 +3,29 @@ import React from 'react';
 import { Global, ThemeProvider } from '@emotion/react';
 import router from '@routes/index';
 import ReactDOM from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { RouterProvider } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 
 import BaseLayout from './components/BaseLayout';
 import reportWebVitals from './reportWebVitals';
 import { reset } from './styles';
 import theme from './theme';
 
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<BaseLayout>
 			<ThemeProvider theme={theme}>
-				<Global styles={reset} />
-				<RouterProvider router={router} />
+				<QueryClientProvider client={queryClient}>
+					<ReactQueryDevtools initialIsOpen={false} />
+					<RecoilRoot>
+						<Global styles={reset} />
+						<RouterProvider router={router} />
+					</RecoilRoot>
+				</QueryClientProvider>
 			</ThemeProvider>
 		</BaseLayout>
 	</React.StrictMode>

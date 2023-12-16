@@ -1,8 +1,16 @@
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 import { Icon } from '~/components';
+import { URL } from '~/constants';
 
 function Start() {
+	const navigate = useNavigate();
+
+	const handleClickStart = () => {
+		navigate(URL.LOCATION_INFORMATION_AGREE);
+	};
+
 	return (
 		<Container>
 			<Wrapper>
@@ -20,7 +28,7 @@ function Start() {
 					</Subscription>
 				</Contents>
 
-				<StartButton>시작하기</StartButton>
+				<StartButton onClick={handleClickStart}>시작하기</StartButton>
 			</Wrapper>
 		</Container>
 	);

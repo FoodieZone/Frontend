@@ -3,18 +3,23 @@ import type { ForwardedRef } from 'react';
 import { forwardRef, useEffect, useState } from 'react';
 
 import { isEmpty } from 'lodash-es';
+import { useRecoilValue } from 'recoil';
 
 import { useGeoLocation } from '~/hooks';
 import { isNotNull, makeCustomOverlay } from '~/utils';
 
 import FoodieList, { swiperMock } from '../FoodieList';
 
+import { locationState } from '~/stores/location';
+
 interface KakaoMapProps {
 	kakaoMap: any;
 }
 
 const KakaoMap = forwardRef(({ kakaoMap }: KakaoMapProps, ref: ForwardedRef<HTMLDivElement>) => {
-	const { latitude, longitude, isLocating, isLocated } = useGeoLocation({ pending: false });
+	const { isLocating, isLocated } = useGeoLocation({ pending: false });
+
+	const { latitude, longitude } = useRecoilValue(locationState);
 
 	const [focusedItemIndex, setFocusedItemIndex] = useState<number>(0);
 	const [customOverlayList, setCustomOverlayList] = useState<any[]>([]);

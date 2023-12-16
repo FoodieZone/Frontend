@@ -1,13 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
+import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
-import { CancelPopup, Icon } from '~/components';
+import { URL } from '~/constants';
 import { useGeoLocation } from '~/hooks';
 
+import { CancelPopup } from '~/components/LocatingAgree';
+import { FullPageLoading, Icon } from '~/components/shared';
+import { fetchRounds, RoundsKey } from '~/queries/rounds';
+import { candidateState } from '~/stores/candidate';
+
 function LocationAgree() {
-	const { geoLocating } = useGeoLocation({ pending: true });
+	const { geoLocating, isLocating, isLocated, location } = useGeoLocation({ pending: true });
+	const navigate = useNavigate();
+
+	const { data: foods, isSuccess } = useQuery({
+		queryKey: RoundsKey.location(),
+		queryFn: () => fetchRounds(location.longitude, location.latitude),
+		enabled: isLocated,
+	});
+
+	const setCategories = useSetRecoilState(candidateState);
+
 	const [isOpenCancelPopup, setIsOpenCancelPopup] = useState(false);
+
+	useEffect(() => {
+		if (!isSuccess) return;
+
+		setCategories(foods);
+
+		if (foods.length === 16) {
+			navigate(URL.HOME);
+
+			return;
+		}
+
+		navigate(URL.WORLD_CUP.ROUND);
+	}, [isSuccess]);
 
 	const handleClickAgree = () => {
 		geoLocating();
@@ -20,6 +52,10 @@ function LocationAgree() {
 	const handleClosePopup = () => {
 		setIsOpenCancelPopup(false);
 	};
+
+	if (isLocating) {
+		return <FullPageLoading />;
+	}
 
 	return (
 		<Container>

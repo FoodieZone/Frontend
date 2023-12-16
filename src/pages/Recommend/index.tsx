@@ -1,20 +1,48 @@
 import styled from '@emotion/styled';
+import _ from 'lodash';
+import { useQuery } from 'react-query';
+import { useLocation } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
-import { Icon } from '~/components';
+import { FullPageLoading, Icon } from '~/components';
+
+import { fetchRestaurant, RestaurantsKey } from '~/queries/restaurant';
+import { locationState } from '~/stores/location';
 
 function Recommend() {
+	const {
+		state: { name },
+	} = useLocation();
+
+	const { latitude, longitude } = useRecoilValue(locationState);
+
+	const { data: restaurants, isSuccess } = useQuery({
+		queryKey: RestaurantsKey.location(),
+		queryFn: () => fetchRestaurant(longitude, latitude, encodeURIComponent(name)),
+		enabled: !!(name && longitude && latitude),
+	});
+
+	if (!isSuccess || _.isEmpty(restaurants))
+		return (
+			<FullPageLoading>
+				푸디존에서 맞춤형 맛집을
+				<br />
+				찾고있습니다! 조금만 기다려주세요🙏🏻
+			</FullPageLoading>
+		);
+
 	return (
 		<Container>
 			<Contents>
-				<Title>근처 햄버거 인기맛집을 추천드려요 !</Title>
+				<Title>근처 {restaurants[0].foodName} 인기맛집을 추천드려요 !</Title>
 
 				<FoodInfoWrapper>
 					<FoodImage name="image-burger" height={327} />
-					<FoodName>버거운 버거</FoodName>
+					<FoodName>{restaurants[0].foodName}</FoodName>
 					<FoodLocationWrapper>
 						<Icon name="icon-map-pin" width={18} height={18} />
-						<StoreName>버거운 버거</StoreName>
-						<StoreAddress>서울특별시 특별구 특별로 123길 45</StoreAddress>
+						<StoreName>{restaurants[0].name}</StoreName>
+						<StoreAddress>{restaurants[0].address}</StoreAddress>
 					</FoodLocationWrapper>
 				</FoodInfoWrapper>
 			</Contents>

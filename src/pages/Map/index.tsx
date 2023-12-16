@@ -3,11 +3,13 @@ import { useEffect, useRef, useState } from 'react';
 
 import styled from '@emotion/styled';
 import { isNull } from 'lodash';
+import { useRecoilValue } from 'recoil';
 
 import { FullPageLoading } from '~/components';
 import { useGeoLocation } from '~/hooks';
 
 import { KakaoMap } from '~/components/Map';
+import { locationState } from '~/stores/location';
 
 declare global {
 	interface Window {
@@ -19,8 +21,9 @@ const { kakao } = window;
 
 function MapPage() {
 	const mapRef = useRef<HTMLDivElement>(null);
+	const { isLocating } = useGeoLocation({ pending: false });
 
-	const { latitude, longitude, isLocating } = useGeoLocation({ pending: false });
+	const { latitude, longitude } = useRecoilValue(locationState);
 
 	const [kakaoMap, setKakaoMap] = useState<any>(null);
 
