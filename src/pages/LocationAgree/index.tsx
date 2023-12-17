@@ -17,15 +17,16 @@ function LocationAgree() {
 	const { geoLocating, isLocating, isLocated, location } = useGeoLocation({ pending: true });
 	const navigate = useNavigate();
 
+	const setCategories = useSetRecoilState(candidateState);
+
+	const [isOpenCancelPopup, setIsOpenCancelPopup] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+
 	const { data: foods, isSuccess } = useQuery({
 		queryKey: RoundsKey.location(),
 		queryFn: () => fetchRounds(location.longitude, location.latitude),
 		enabled: isLocated,
 	});
-
-	const setCategories = useSetRecoilState(candidateState);
-
-	const [isOpenCancelPopup, setIsOpenCancelPopup] = useState(false);
 
 	useEffect(() => {
 		if (!isSuccess) return;
@@ -39,7 +40,15 @@ function LocationAgree() {
 		}
 
 		navigate(URL.WORLD_CUP.ROUND);
+
+		setIsLoading(false);
 	}, [isSuccess]);
+
+	useEffect(() => {
+		if (isLocating) {
+			setIsLoading(true);
+		}
+	}, [isLocating]);
 
 	const handleClickAgree = () => {
 		geoLocating();
@@ -53,7 +62,7 @@ function LocationAgree() {
 		setIsOpenCancelPopup(false);
 	};
 
-	if (isLocating) {
+	if (isLoading) {
 		return <FullPageLoading />;
 	}
 
