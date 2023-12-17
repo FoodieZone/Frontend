@@ -20,7 +20,7 @@ interface KakaoMapProps {
 }
 
 const KakaoMap = forwardRef(({ kakaoMap, name }: KakaoMapProps, ref: ForwardedRef<HTMLDivElement>) => {
-	const { isLocating, isLocated } = useGeoLocation({ pending: false });
+	const { isLocating } = useGeoLocation({ pending: false });
 
 	const { latitude, longitude } = useRecoilValue(locationState);
 
@@ -45,13 +45,13 @@ const KakaoMap = forwardRef(({ kakaoMap, name }: KakaoMapProps, ref: ForwardedRe
 
 	// init current location marker
 	useEffect(() => {
-		if (!isLocated) {
+		if (!(latitude && latitude)) {
 			return;
 		}
 
 		settingCurrentLocation();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isLocated]);
+	}, [latitude, longitude]);
 
 	// init foodielist marker
 	useEffect(() => {

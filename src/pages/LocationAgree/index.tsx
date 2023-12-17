@@ -14,7 +14,11 @@ import { fetchRounds, RoundsKey } from '~/queries/rounds';
 import { candidateState } from '~/stores/candidate';
 
 function LocationAgree() {
-	const { geoLocating, isLocating, isLocated, location } = useGeoLocation({ pending: true });
+	const {
+		geoLocating,
+		isLocating,
+		location: { longitude, latitude },
+	} = useGeoLocation({ pending: true });
 	const navigate = useNavigate();
 
 	const setCategories = useSetRecoilState(candidateState);
@@ -24,8 +28,8 @@ function LocationAgree() {
 
 	const { data: foods, isSuccess } = useQuery({
 		queryKey: RoundsKey.location(),
-		queryFn: () => fetchRounds(location.longitude, location.latitude),
-		enabled: isLocated,
+		queryFn: () => fetchRounds(longitude, latitude),
+		enabled: Boolean(longitude && latitude),
 	});
 
 	useEffect(() => {
@@ -49,6 +53,12 @@ function LocationAgree() {
 			setIsLoading(true);
 		}
 	}, [isLocating]);
+
+	useEffect(() => {
+		if (longitude && latitude && !isSuccess) {
+			setIsLoading(true);
+		}
+	}, [longitude, latitude, isSuccess]);
 
 	const handleClickAgree = () => {
 		geoLocating();
