@@ -102,10 +102,13 @@ const KakaoMap = forwardRef(({ kakaoMap, name }: KakaoMapProps, ref: ForwardedRe
 		kakaoMap.panTo(moveLatLng);
 	};
 
+	if (!isSuccess) return <></>;
+
 	return (
 		<>
 			<div ref={ref} />
 			<FoodieList
+				restaurants={restaurants}
 				handleClickCurrentLocationButton={handleClickCurrentLocationButton}
 				handleChangeFocusedItemIndex={handleChangeFocusedItemIndex}
 			/>
