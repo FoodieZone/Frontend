@@ -10,8 +10,11 @@ import { RecoilRoot } from 'recoil';
 
 import BaseLayout from './components/BaseLayout';
 import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { reset } from './styles';
 import theme from './theme';
+
+serviceWorkerRegistration.register();
 
 const queryClient = new QueryClient();
 
