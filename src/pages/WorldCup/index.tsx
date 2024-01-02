@@ -6,7 +6,9 @@ import { useRecoilValue } from 'recoil';
 
 import { wait } from '~/utils';
 
-import { Candidate, candidateState } from '~/stores/candidate';
+import type { Candidate } from '~/stores/candidate';
+
+import { candidateState } from '~/stores/candidate';
 
 const WorldCupPage = () => {
 	const navigate = useNavigate();
@@ -128,7 +130,6 @@ const CandidateImage = styled.div<{ selected: boolean }>`
 	background-color: ${({ selected }) => (selected ? '#ff5e60' : 'rgba(237, 237, 247, 0.50)')};
 
 	border-radius: 50%;
-	transition: background-color 0.5s ease;
 `;
 
 const CandidateName = styled.div`

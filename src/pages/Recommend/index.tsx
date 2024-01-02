@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 import _ from 'lodash';
 import { useQuery } from 'react-query';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { FullPageLoading, Icon } from '~/components';
+import { URL } from '~/constants';
 
 import { fetchRestaurant, RestaurantsKey } from '~/queries/restaurant';
 import { locationState } from '~/stores/location';
@@ -13,6 +14,7 @@ function Recommend() {
 	const {
 		state: { name },
 	} = useLocation();
+	const navigate = useNavigate();
 
 	const { latitude, longitude } = useRecoilValue(locationState);
 
@@ -21,6 +23,10 @@ function Recommend() {
 		queryFn: () => fetchRestaurant(longitude, latitude, encodeURIComponent(name)),
 		enabled: !!(name && longitude && latitude),
 	});
+
+	const handleClickShowMoreButton = () => {
+		navigate(URL.MAP, { state: { name } });
+	};
 
 	if (!isSuccess || _.isEmpty(restaurants))
 		return (
@@ -47,7 +53,7 @@ function Recommend() {
 				</FoodInfoWrapper>
 			</Contents>
 
-			<ShowMoreButton>다른 맛집 더보기</ShowMoreButton>
+			<ShowMoreButton onClick={handleClickShowMoreButton}>다른 맛집 더보기</ShowMoreButton>
 		</Container>
 	);
 }

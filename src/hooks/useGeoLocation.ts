@@ -12,7 +12,6 @@ function useGeoLocation({ pending = false }: Props) {
 	const [location, setLocation] = useRecoilState(locationState);
 
 	const [isLocating, setIsLocating] = useState(false);
-	const [isLocated, setIsLocated] = useState(false);
 	const [isFail, setIsFail] = useState(false);
 
 	const options: PositionOptions = useMemo(
@@ -32,7 +31,6 @@ function useGeoLocation({ pending = false }: Props) {
 			longitude: coords.longitude,
 		});
 
-		setIsLocated(true);
 		setIsLocating(false);
 	};
 
@@ -59,7 +57,6 @@ function useGeoLocation({ pending = false }: Props) {
 
 	return {
 		isFail,
-		isLocated,
 		isLocating,
 		location,
 		geoLocating,

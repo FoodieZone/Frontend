@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import styled from '@emotion/styled';
 import { isNull } from 'lodash';
+import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { FullPageLoading } from '~/components';
@@ -20,6 +21,9 @@ declare global {
 const { kakao } = window;
 
 function MapPage() {
+	const {
+		state: { name },
+	} = useLocation();
 	const mapRef = useRef<HTMLDivElement>(null);
 	const { isLocating } = useGeoLocation({ pending: false });
 
@@ -72,7 +76,7 @@ function MapPage() {
 
 	return (
 		<Container>
-			<KakaoMap kakaoMap={kakaoMap} ref={mapRef} />
+			<KakaoMap kakaoMap={kakaoMap} ref={mapRef} name={name} />
 		</Container>
 	);
 }

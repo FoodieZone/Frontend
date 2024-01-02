@@ -14,18 +14,23 @@ import { fetchRounds, RoundsKey } from '~/queries/rounds';
 import { candidateState } from '~/stores/candidate';
 
 function LocationAgree() {
-	const { geoLocating, isLocating, isLocated, location } = useGeoLocation({ pending: true });
+	const {
+		geoLocating,
+		isLocating,
+		location: { longitude, latitude },
+	} = useGeoLocation({ pending: true });
 	const navigate = useNavigate();
-
-	const { data: foods, isSuccess } = useQuery({
-		queryKey: RoundsKey.location(),
-		queryFn: () => fetchRounds(location.longitude, location.latitude),
-		enabled: isLocated,
-	});
 
 	const setCategories = useSetRecoilState(candidateState);
 
 	const [isOpenCancelPopup, setIsOpenCancelPopup] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+
+	const { data: foods, isSuccess } = useQuery({
+		queryKey: RoundsKey.location(),
+		queryFn: () => fetchRounds(longitude, latitude),
+		enabled: Boolean(longitude && latitude),
+	});
 
 	useEffect(() => {
 		if (!isSuccess) return;
@@ -39,7 +44,21 @@ function LocationAgree() {
 		}
 
 		navigate(URL.WORLD_CUP.ROUND);
+
+		setIsLoading(false);
 	}, [isSuccess]);
+
+	useEffect(() => {
+		if (isLocating) {
+			setIsLoading(true);
+		}
+	}, [isLocating]);
+
+	useEffect(() => {
+		if (longitude && latitude && !isSuccess) {
+			setIsLoading(true);
+		}
+	}, [longitude, latitude, isSuccess]);
 
 	const handleClickAgree = () => {
 		geoLocating();
@@ -53,7 +72,7 @@ function LocationAgree() {
 		setIsOpenCancelPopup(false);
 	};
 
-	if (isLocating) {
+	if (isLoading) {
 		return <FullPageLoading />;
 	}
 
